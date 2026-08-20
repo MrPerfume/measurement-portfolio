@@ -41,7 +41,7 @@ scan_public_text() {
     while IFS= read -r file; do
         [[ "$file" == 'scripts/verify.sh' ]] && continue
 
-        if grep -I -E -n -i -- "$pattern" "$file"; then
+        if grep -H -I -E -n -i -- "$pattern" "$file"; then
             matched=0
         fi
     done < <(public_files)
@@ -90,7 +90,23 @@ if scan_public_text "$private_boundary_pattern"; then
     exit 1
 fi
 
-if scan_public_text 'https?://|([0-9]{1,3}\.){3}[0-9]{1,3}'; then
+network_matches="$(scan_public_text 'https?://|([0-9]{1,3}\.){3}[0-9]{1,3}' || true)"
+allowed_badge_markdown='[![Verify](https://github.com/MrPerfume/measurement-portfolio/actions/workflows/verify.yml/badge.svg)](https://github.com/MrPerfume/measurement-portfolio/actions/workflows/verify.yml)'
+unexpected_network_matches="$(printf '%s\n' "$network_matches" | awk -v allowed="$allowed_badge_markdown" '
+    {
+        if (match($0, /^(\.\/)?README\.md:[0-9]+:/)) {
+            content = substr($0, RLENGTH + 1)
+            if (content == allowed) {
+                next
+            }
+        }
+
+        print
+    }
+')"
+
+if [[ -n "$unexpected_network_matches" ]]; then
+    printf '%s\n' "$unexpected_network_matches"
     echo 'Unexpected URL or IPv4 address found; review before publication.' >&2
     exit 1
 fi

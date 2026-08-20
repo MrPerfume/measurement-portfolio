@@ -1,6 +1,6 @@
 # 计量设备与校验协同系统｜Measurement Portfolio
 
-[![Verify](/MrPerfume/measurement-portfolio/actions/workflows/verify.yml/badge.svg)](/MrPerfume/measurement-portfolio/actions/workflows/verify.yml)
+[![Verify](https://github.com/MrPerfume/measurement-portfolio/actions/workflows/verify.yml/badge.svg)](https://github.com/MrPerfume/measurement-portfolio/actions/workflows/verify.yml)
 
 > 一个可公开审阅、可本地运行的计量设备与校验协同领域内核，展示业务建模、状态守卫、可解释匹配、幂等处理、部分回件与审计思维。
 
