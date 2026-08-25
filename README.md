@@ -8,7 +8,63 @@
 - **个人职责**：独立完成需求梳理、流程设计、领域建模和系统开发。
 - **当前状态**：测试/演示阶段，小范围试用已安排；未正式上线，不宣称生产成效。
 
-![排检计划与任务概览（合成演示数据）](assets/calibration-plan-demo.jpg)
+## 系统展示
+
+> 以下界面全部使用脱敏合成演示数据，仅用于展示系统设计与工程实现，不代表正式生产环境、真实客户信息或已确认业务成效。点击图片可查看完整尺寸。
+
+<p align="center">
+  <a href="assets/screenshots/01-system-overview.png">
+    <img src="assets/screenshots/01-system-overview.png" alt="计量管理系统整体概览" width="100%">
+  </a>
+</p>
+
+这张图证明什么：系统从统一管理概览进入设备台账、排检监督、证书、异常和管理分析，不是单一 CRUD 页面。
+
+<table>
+  <tr>
+    <td width="50%">
+      <a href="assets/screenshots/02-instrument-lifecycle.png">
+        <img src="assets/screenshots/02-instrument-lifecycle.png" alt="单台设备全生命周期">
+      </a>
+    </td>
+    <td width="50%">
+      <a href="assets/screenshots/03-calibration-plan.png">
+        <img src="assets/screenshots/03-calibration-plan.png" alt="排检计划与风险预警">
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>设备全生命周期</strong><br>这张图证明什么：设备的建档、位置、校验、证书、任务和异常被组织成一条可追溯业务链。</td>
+    <td><strong>排检计划与风险预警</strong><br>这张图证明什么：系统能够把月度计划、完成进度、逾期风险和下一处理动作统一到计划监督视图。</td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td width="50%">
+      <a href="assets/screenshots/04-certificate-review.png">
+        <img src="assets/screenshots/04-certificate-review.png" alt="证书智能复核与人工判断">
+      </a>
+    </td>
+    <td width="50%">
+      <a href="assets/screenshots/05-submission-collaboration.png">
+        <img src="assets/screenshots/05-submission-collaboration.png" alt="送检及跨角色协同">
+      </a>
+    </td>
+  </tr>
+  <tr>
+    <td><strong>证书智能复核</strong><br>这张图证明什么：结构化解析、候选匹配、置信度、字段冲突和人工复核建议形成可解释的人机协同。</td>
+    <td><strong>送检跨角色协同</strong><br>这张图证明什么：车间交接、检测处理、回件领取和下一动作被连接成多角色协同队列。</td>
+  </tr>
+</table>
+
+<p align="center">
+  <a href="assets/screenshots/06-quality-governance.png">
+    <img src="assets/screenshots/06-quality-governance.png" alt="异常、质量与审计治理" width="100%">
+  </a>
+</p>
+
+这张图证明什么：异常发现、责任分派、截止时间、重复命中、重开、复扫与关闭构成可审计的治理闭环。
 
 这不是私有生产仓库的镜像，也不是可直接部署的企业系统。它是从真实复杂业务中提炼出的**脱敏重构版作品集**：不包含原 Git 历史、企业与人员信息、真实设备/证书/数据库、域名与服务器信息、通知配置、Webhook、Token、密钥或内部运维记录。
 
