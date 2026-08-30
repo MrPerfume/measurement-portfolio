@@ -1,0 +1,155 @@
+{
+  "meta": {
+    "label": "脱敏演示数据 · Demo Data",
+    "prototype": "静态交互原型",
+    "version": "1.0.0"
+  },
+  "roles": [
+    {
+      "id": "metrology",
+      "label": "计量管理员",
+      "description": "从实物接收开始，保证送检、证书与异常事实连续。"
+    },
+    {
+      "id": "lab",
+      "label": "检测方",
+      "description": "只查看已经实际送出的设备与当前跟进状态。"
+    },
+    {
+      "id": "manager",
+      "label": "管理者",
+      "description": "关注逾期风险、规则例外和可追溯处理证据。"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "intake",
+      "label": "计划外收件",
+      "kicker": "实物先到，需求未建",
+      "summary": "正常设备继续流转，异常设备逐台留证，不让一台问题设备卡住整批。"
+    },
+    {
+      "id": "lab",
+      "label": "在检跟进",
+      "kicker": "按真实送出轮次",
+      "summary": "44 天不提醒、45 天首次提醒，结果未知时停止自动重发。"
+    },
+    {
+      "id": "certificate",
+      "label": "证书复核",
+      "kicker": "分数不是最终结论",
+      "summary": "只有高分、无关键冲突且候选唯一时，系统才允许自动关联。"
+    },
+    {
+      "id": "audit",
+      "label": "审计闭环",
+      "kicker": "每个决定都有证据",
+      "summary": "把收件、送出、提醒、回件和复核动作组织成可解释时间线。"
+    }
+  ],
+  "intake": {
+    "batchId": "DEMO-BATCH-2026-008",
+    "lab": "演示检测机构",
+    "items": [
+      {
+        "id": "DEMO-EQ-0001",
+        "name": "数字压力表",
+        "category": "压力仪表",
+        "factoryNumber": "DEMO-FN-0001",
+        "status": "ready",
+        "issue": null
+      },
+      {
+        "id": "DEMO-EQ-0008",
+        "name": "温度变送器",
+        "category": "温度仪表",
+        "factoryNumber": "DEMO-FN-0008",
+        "status": "ready",
+        "issue": null
+      },
+      {
+        "id": "DEMO-TEMP-0099",
+        "name": "待识别压力表",
+        "category": "临时身份",
+        "factoryNumber": "待核对",
+        "status": "exception",
+        "issue": "铭牌模糊，保留临时身份"
+      }
+    ]
+  },
+  "lab": {
+    "thresholdDays": 45,
+    "records": [
+      {
+        "id": "DEMO-ROUND-0044",
+        "lab": "演示检测机构",
+        "sentOn": "2026-07-17",
+        "days": 44,
+        "itemCount": 2,
+        "status": "at_lab",
+        "reminderStatus": "not_due"
+      },
+      {
+        "id": "DEMO-ROUND-0045",
+        "lab": "演示检测机构",
+        "sentOn": "2026-07-16",
+        "days": 45,
+        "itemCount": 3,
+        "status": "at_lab",
+        "reminderStatus": "due"
+      },
+      {
+        "id": "DEMO-ROUND-0066",
+        "lab": "演示第二检测机构",
+        "sentOn": "2026-06-25",
+        "days": 66,
+        "itemCount": 1,
+        "status": "at_lab",
+        "reminderStatus": "unknown"
+      }
+    ]
+  },
+  "certificate": {
+    "number": "DEMO-CAL-2026-001",
+    "instrumentName": "数字压力表",
+    "specification": "0.05级 / M20×1.5",
+    "calibrationDate": "2026-08-24",
+    "candidates": [
+      {
+        "id": "DEMO-EQ-0001",
+        "score": 96,
+        "level": "high",
+        "uniqueBest": true,
+        "criticalConflict": false,
+        "reasons": ["本厂编号一致", "设备名称一致", "校验日期在容差内"],
+        "conflicts": []
+      },
+      {
+        "id": "DEMO-EQ-0008",
+        "score": 78,
+        "level": "high",
+        "uniqueBest": false,
+        "criticalConflict": true,
+        "reasons": ["设备名称部分一致", "校验日期接近"],
+        "conflicts": ["本厂编号冲突", "量程需要人工确认"]
+      },
+      {
+        "id": "DEMO-EQ-0099",
+        "score": 42,
+        "level": "low",
+        "uniqueBest": false,
+        "criticalConflict": false,
+        "reasons": ["设备类别接近"],
+        "conflicts": ["缺少有效身份字段"]
+      }
+    ]
+  },
+  "auditSeed": [
+    {
+      "id": "EVT-000",
+      "type": "demo.ready",
+      "title": "演示环境已就绪",
+      "detail": "所有操作只影响当前浏览器内存，刷新页面即可恢复。"
+    }
+  ]
+}

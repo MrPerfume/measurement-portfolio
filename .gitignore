@@ -9,6 +9,8 @@ node_modules/
 coverage/
 build/
 dist/
+.pages-dist/
+output/
 storage/
 *.log
 *.sqlite

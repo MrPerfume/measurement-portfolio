@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <meta name="theme-color" content="#f7f8fa">
+  <meta name="description" content="从计量管理员到计量数字化管理者：通过脱敏交互原型展示计划外送检、在检跟进、证书复核与审计闭环。">
+  <meta name="robots" content="index,follow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'; form-action 'none'">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="计量数字化管理作品集">
+  <meta property="og:description" content="把现场计量规则转化为可执行、可审计的协同系统。">
+  <meta property="og:url" content="https://mrperfume.github.io/measurement-portfolio/">
+  <meta property="og:image" content="https://mrperfume.github.io/measurement-portfolio/assets/screenshots/01-system-overview.png">
+  <link rel="canonical" href="https://mrperfume.github.io/measurement-portfolio/">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <title>计量数字化管理作品集</title>
+</head>
+<body>
+  <a class="skip-link" href="#main-content">跳到主要内容</a>
+
+  <header class="site-header" aria-label="站点导航">
+    <a class="brand" href="#top" aria-label="返回作品集首页">
+      <span class="brand-mark" aria-hidden="true">M</span>
+      <span>
+        <strong>Measurement Practice</strong>
+        <small>计量数字化管理作品集</small>
+      </span>
+    </a>
+    <nav class="header-links" aria-label="页面导航">
+      <a href="#demo">交互演示</a>
+      <a href="#evidence">工程证据</a>
+      <a class="github-link" href="https://github.com/MrPerfume" target="_blank" rel="noreferrer">GitHub Profile <span aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+
+  <main id="main-content">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="eyebrow">从计量管理员到计量数字化管理者</p>
+        <h1 id="hero-title"><span>把现场规则，变成</span><span>可执行的管理系统</span></h1>
+        <p class="hero-lede">我把设备台账、送检、证书和异常协同中容易失真的现场事实，整理成可追踪、可解释、可审计的数字化流程。工业软件实施与产品顾问，是这套能力可以继续迁移的方向。</p>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#demo">进入交互演示</a>
+          <a class="button button-secondary" href="https://github.com/MrPerfume/measurement-portfolio" target="_blank" rel="noreferrer">查看公开源码 <span aria-hidden="true">↗</span></a>
+        </div>
+        <ul class="hero-proof" aria-label="核心证明">
+          <li><strong>业务判断</strong><span>从实物交接开始，不强迫现场补造前置事实</span></li>
+          <li><strong>可靠性治理</strong><span>异常隔离、幂等、状态守卫与通知结果分级</span></li>
+          <li><strong>工程证据</strong><span>公开领域内核、边界测试与持续验证</span></li>
+        </ul>
+      </div>
+
+      <div class="hero-instrument" aria-label="业务闭环概览">
+        <div class="instrument-head">
+          <span class="demo-badge">脱敏演示数据 · Demo Data</span>
+          <span class="prototype-label">静态交互原型</span>
+        </div>
+        <div class="dial" aria-hidden="true">
+          <span class="dial-value">45</span>
+          <span class="dial-unit">天首次跟进阈值</span>
+          <span class="dial-needle"></span>
+        </div>
+        <div class="instrument-reading">
+          <span>规则状态</span>
+          <strong>事实可证明后才流转</strong>
+        </div>
+        <div class="evidence-strip" aria-label="公开可验证数据">
+          <div><strong>20</strong><span>领域测试</span></div>
+          <div><strong>57</strong><span>公开断言</span></div>
+          <div><strong>3</strong><span>角色视角</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="rail-section" aria-labelledby="rail-title">
+      <div class="section-heading compact-heading">
+        <div>
+          <p class="eyebrow">Calibration trace</p>
+          <h2 id="rail-title">一条业务事实，如何走到闭环</h2>
+        </div>
+        <p>点击刻度，直接进入对应演示。</p>
+      </div>
+      <div class="calibration-rail" aria-label="业务流程刻度">
+        <button type="button" data-scenario="intake"><span>01</span><strong>实物接收</strong><small>计划外也能留证</small></button>
+        <button type="button" data-scenario="lab"><span>02</span><strong>送出在检</strong><small>按真实轮次汇总</small></button>
+        <button type="button" data-scenario="lab"><span>03</span><strong>到期跟进</strong><small>45 天首次提醒</small></button>
+        <button type="button" data-scenario="certificate"><span>04</span><strong>证书复核</strong><small>冲突阻断猜测</small></button>
+        <button type="button" data-scenario="audit"><span>05</span><strong>审计闭环</strong><small>决定都有依据</small></button>
+      </div>
+    </section>
+
+    <section class="demo-section" id="demo" aria-labelledby="demo-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Interactive case</p>
+          <h2 id="demo-title">亲手走一遍脱敏业务闭环</h2>
+        </div>
+        <p>所有按钮只改变当前页面内存；不读取真实数据，也不会发送任何消息。</p>
+      </div>
+
+      <div class="role-switcher" aria-label="切换观察视角">
+        <span>观察视角</span>
+        <div id="role-buttons" class="segmented-control"></div>
+        <p id="role-description"></p>
+        <button class="reset-button" type="button" data-action="reset">重置演示</button>
+      </div>
+
+      <div class="demo-shell">
+        <aside class="demo-sidebar" aria-label="演示场景">
+          <div class="sidebar-head">
+            <span class="sidebar-logo" aria-hidden="true">量</span>
+            <span><strong>计量协同台</strong><small>DEMO WORKSPACE</small></span>
+          </div>
+          <nav id="scenario-nav"></nav>
+          <div class="sidebar-note">
+            <span class="status-dot"></span>
+            <span>浏览器内存模式<br><small>刷新即可恢复</small></span>
+          </div>
+        </aside>
+
+        <div class="demo-workspace">
+          <div class="workspace-topbar">
+            <div>
+              <span class="workspace-kicker" id="workspace-kicker"></span>
+              <h3 id="workspace-title"></h3>
+            </div>
+            <div class="workspace-meta">
+              <span><i class="status-dot"></i> 规则在线</span>
+              <span id="event-count">1 条事件</span>
+            </div>
+          </div>
+          <div id="scenario-content" class="scenario-content" tabindex="-1"></div>
+          <noscript><p class="noscript-message">交互演示需要启用 JavaScript；工程文档与截图画廊仍可直接阅读。</p></noscript>
+        </div>
+      </div>
+
+      <div id="notice-region" class="notice" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+    </section>
+
+    <section class="evidence-section" id="evidence" aria-labelledby="evidence-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">Visible evidence</p>
+          <h2 id="evidence-title">界面覆盖面与公开证据</h2>
+        </div>
+        <p>截图全部来自隔离演示环境，使用合成编号、角色和数量。</p>
+      </div>
+
+      <div class="gallery">
+        <figure class="gallery-featured">
+          <a href="assets/screenshots/01-system-overview.png" target="_blank" rel="noreferrer">
+            <img src="assets/screenshots/01-system-overview.png" alt="计量管理系统整体概览，显示设备、排检、证书和异常分析入口" width="1600" height="900" loading="lazy">
+          </a>
+          <figcaption><strong>统一管理概览</strong><span>从管理问题进入台账、质量、证书和消息协同，不是单一 CRUD 菜单。</span></figcaption>
+        </figure>
+        <figure>
+          <a href="assets/screenshots/02-instrument-lifecycle.png" target="_blank" rel="noreferrer">
+            <img src="assets/screenshots/02-instrument-lifecycle.png" alt="单台设备全生命周期时间线" width="1600" height="900" loading="lazy">
+          </a>
+          <figcaption><strong>设备全生命周期</strong><span>建档、位置、校验、证书和异常被组织成一条可追溯事实链。</span></figcaption>
+        </figure>
+        <figure>
+          <a href="assets/screenshots/03-calibration-plan.png" target="_blank" rel="noreferrer">
+            <img src="assets/screenshots/03-calibration-plan.png" alt="排检计划、完成进度与逾期风险" width="1600" height="900" loading="lazy">
+          </a>
+          <figcaption><strong>排检计划监督</strong><span>计划、逾期风险和下一处理动作出现在同一管理视图。</span></figcaption>
+        </figure>
+        <figure>
+          <a href="assets/screenshots/04-certificate-review.png" target="_blank" rel="noreferrer">
+            <img src="assets/screenshots/04-certificate-review.png" alt="证书结构化解析、候选匹配和冲突复核" width="1600" height="900" loading="lazy">
+          </a>
+          <figcaption><strong>证书智能复核</strong><span>系统给出分数、依据和冲突，高分也不能绕过关键字段守卫。</span></figcaption>
+        </figure>
+        <figure>
+          <a href="assets/screenshots/05-submission-collaboration.png" target="_blank" rel="noreferrer">
+            <img src="assets/screenshots/05-submission-collaboration.png" alt="送检、回件和跨角色工作台" width="1600" height="900" loading="lazy">
+          </a>
+          <figcaption><strong>送检跨角色协同</strong><span>车间交接、检测方在检、回件领取与下一动作连续呈现。</span></figcaption>
+        </figure>
+        <figure>
+          <a href="assets/screenshots/06-quality-governance.png" target="_blank" rel="noreferrer">
+            <img src="assets/screenshots/06-quality-governance.png" alt="异常、责任、截止时间与复扫治理列表" width="1600" height="900" loading="lazy">
+          </a>
+          <figcaption><strong>异常与质量治理</strong><span>发现、分派、重开、复扫与关闭形成可审计治理闭环。</span></figcaption>
+        </figure>
+      </div>
+
+      <div class="evidence-links">
+        <a href="https://github.com/MrPerfume/measurement-portfolio/blob/main/docs/ENGINEERING_EVIDENCE.md" target="_blank" rel="noreferrer"><span>工程证据</span><strong>状态守卫、幂等与边界测试 <b aria-hidden="true">↗</b></strong></a>
+        <a href="https://github.com/MrPerfume/measurement-portfolio/blob/main/docs/BUSINESS_FLOWS.md" target="_blank" rel="noreferrer"><span>业务流程</span><strong>从设备台账到审计闭环 <b aria-hidden="true">↗</b></strong></a>
+        <a href="https://github.com/MrPerfume/measurement-portfolio/actions/workflows/verify.yml" target="_blank" rel="noreferrer"><span>持续验证</span><strong>PHP 8.3 / 8.4 实时结果 <b aria-hidden="true">↗</b></strong></a>
+      </div>
+    </section>
+
+    <section class="closing" aria-labelledby="closing-title">
+      <p class="eyebrow">Next role</p>
+      <h2 id="closing-title">我希望继续解决的，不只是台账问题。</h2>
+      <p>下一阶段，我希望把计量现场经验延展为设备与质量数字化管理能力，并参与工业软件实施、业务梳理和产品落地。</p>
+      <a class="button button-primary" href="https://github.com/MrPerfume" target="_blank" rel="noreferrer">通过 GitHub 了解我 <span aria-hidden="true">↗</span></a>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <span>Measurement Portfolio · Sanitized Public Demo</span>
+    <span>无真实业务数据 · 无外部请求 · 无持久化</span>
+  </footer>
+
+  <template id="demo-data">__DEMO_DATA__</template>
+  <script type="module" src="app.mjs"></script>
+</body>
+</html>
