@@ -78,14 +78,26 @@ $embeddedData = json_encode(
         | JSON_HEX_APOS
         | JSON_HEX_QUOT,
 );
+$assets = ['styles.css', 'app.mjs', 'state.mjs', 'views.mjs', 'domain/common.mjs', 'domain/physical.mjs', 'domain/weekly.mjs', 'domain/certificates.mjs', 'favicon.svg'];
+// HTML 与整个模块依赖图使用同一内容版本，避免旧浏览器缓存混用新版合成契约。
+$fingerprint = hash_init('sha256');
+hash_update($fingerprint, $template.$embeddedData);
+foreach ($assets as $asset) hash_update($fingerprint, (string) file_get_contents($root.'/site/'.$asset));
+$version = substr(hash_final($fingerprint), 0, 16);
 $index = str_replace('__DEMO_DATA__', $embeddedData, $template);
+$index = str_replace(['href="styles.css"', 'src="app.mjs"'], ['href="styles.css?v='.$version.'"', 'src="app.mjs?v='.$version.'"'], $index);
 
 if (file_put_contents($dist.'/index.html', $index) === false) {
     throw new RuntimeException('Unable to write the generated index page.');
 }
 
-foreach (['styles.css', 'app.mjs', 'state.mjs', 'views.mjs', 'domain/common.mjs', 'domain/physical.mjs', 'domain/weekly.mjs', 'domain/certificates.mjs', 'favicon.svg'] as $asset) {
+foreach ($assets as $asset) {
     copyFile($root.'/site/'.$asset, $dist.'/'.$asset);
+    if (str_ends_with($asset, '.mjs')) {
+        $source = (string) file_get_contents($dist.'/'.$asset);
+        $source = preg_replace_callback('/from\s+([\'"])(\.[^\'"]+\.mjs)\1/', static fn (array $match): string => 'from '.$match[1].$match[2].'?v='.$version.$match[1], $source);
+        if (file_put_contents($dist.'/'.$asset, $source) === false) throw new RuntimeException('Unable to version module '.$asset);
+    }
 }
 
 copyFile($root.'/site/data/demo.json', $dist.'/data/demo.json');

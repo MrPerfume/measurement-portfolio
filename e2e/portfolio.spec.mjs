@@ -7,6 +7,23 @@ const form = (page, name) => page.getByRole('form', { name, exact: true });
 const scope = (page) => page.locator('#scenario-content');
 const reference = '2026-09-07';
 
+test('发布资源版本隔离旧脚本并覆盖整个模块依赖图', async ({ page }) => {
+  const versions = [];
+  await page.route('**/*.mjs*', async (route) => {
+    const version = new URL(route.request().url()).searchParams.get('v');
+    versions.push(version);
+    if (!version) await route.fulfill({ contentType: 'text/javascript', body: 'throw new Error("stale module must not load")' });
+    else await route.continue();
+  });
+  await page.reload();
+  await expect(page.locator('#workspace-title')).toHaveText('计划外收件');
+  expect(versions.length).toBeGreaterThanOrEqual(7);
+  expect(new Set(versions).size).toBe(1);
+  expect(versions[0]).toMatch(/^[a-f0-9]{16}$/);
+  const styles = await page.locator('link[rel="stylesheet"]').getAttribute('href');
+  expect(styles).toBe('styles.css?v=' + versions[0]);
+});
+
 test('场景直达、无效参数和旧锚点兼容', async ({ page }, testInfo) => {
   await page.screenshot({ path: 'output/playwright/entry-20261001/raw/' + testInfo.project.name + '-home.png' });
   for (const [id, label] of [['weekly','周报检'], ['intake','计划外收件'], ['lab','在检跟进'], ['returns','取回与领取'], ['certificate','连续复核'], ['audit','审计闭环']]) {

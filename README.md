@@ -4,7 +4,7 @@
 
 [展示页](https://mrperfume.github.io/measurement-portfolio/) · [业务案例](docs/BUSINESS_FLOWS.md) · [工程证据](docs/ENGINEERING_EVIDENCE.md) · [GitHub Profile](https://github.com/MrPerfume)
 
-**当前为本地候选版，未公开发布。** 线上仍是历史版本，以下场景直达能力待本候选发布后生效；历史 CI 不代表当前候选通过。
+六场景版本于 **2026-10-01** 经 [PR #5](https://github.com/MrPerfume/measurement-portfolio/pull/5) 合并并部署。后续修订的实际上线状态以 [Pages 工作流](https://github.com/MrPerfume/measurement-portfolio/actions/workflows/pages.yml) 为准；历史本地验收与当前发布分开记录，详见[发布复核](docs/INTERACTION_QA.md#publication-20261001)。
 
 ## 我负责什么
 
@@ -14,7 +14,7 @@
 
 推荐路线：分批取回 → 查看剩余在检数量 → 查看审计记录。
 
-| 代表案例 | 要验证的判断 | 入口（候选发布后生效） |
+| 代表案例 | 要验证的判断 | 在线入口 |
 | --- | --- | --- |
 | 同批送出，不同方式取回 | 逐台记录去向，未选设备仍在检 | [分批取回](https://mrperfume.github.io/measurement-portfolio/?scenario=returns#demo) |
 | 一次报检，多次到场 | 预约不替代到场，建议不覆盖正式安排 | [周报检](https://mrperfume.github.io/measurement-portfolio/?scenario=weekly#demo) |
