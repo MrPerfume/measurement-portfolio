@@ -84,7 +84,7 @@ if (file_put_contents($dist.'/index.html', $index) === false) {
     throw new RuntimeException('Unable to write the generated index page.');
 }
 
-foreach (['styles.css', 'app.mjs', 'state.mjs', 'favicon.svg'] as $asset) {
+foreach (['styles.css', 'app.mjs', 'state.mjs', 'views.mjs', 'domain/common.mjs', 'domain/physical.mjs', 'domain/weekly.mjs', 'domain/certificates.mjs', 'favicon.svg'] as $asset) {
     copyFile($root.'/site/'.$asset, $dist.'/'.$asset);
 }
 
@@ -98,6 +98,11 @@ if (count($screenshots) !== 6) {
 
 foreach ($screenshots as $screenshot) {
     copyFile($screenshot, $dist.'/assets/screenshots/'.basename($screenshot));
+}
+
+// 新案例只收录本公开原型的三张合成截图，不扩大到其他本地验收产物。
+foreach (['01-weekly.png', '02-returns.png', '03-review.png'] as $case) {
+    copyFile($root.'/assets/cases/'.$case, $dist.'/assets/cases/'.$case);
 }
 
 if (file_put_contents($dist.'/.nojekyll', '') === false) {

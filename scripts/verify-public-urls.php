@@ -7,7 +7,7 @@ $excludedDirectories = ['.git', '.pages-dist', 'node_modules', 'output', 'vendor
 $excludedFiles = ['scripts/verify-public-urls.php', 'scripts/verify.sh'];
 $violations = [];
 
-function approvedPublicUrl(string $url): bool
+function approvedPublicUrl(string $url, string $relative = ''): bool
 {
     $parts = parse_url(rtrim($url, '.,;'));
 
@@ -18,6 +18,17 @@ function approvedPublicUrl(string $url): bool
     $scheme = strtolower($parts['scheme']);
     $host = strtolower($parts['host']);
     $path = $parts['path'] ?? '/';
+
+    // 只允许锁文件的三项开发依赖，以及明确的测试/截图脚本访问本地静态服务。
+    // 这不是运行期白名单扩张；site/ 与发布 HTML 仍只能引用原有公开来源。
+    if ($relative === 'package-lock.json' && $scheme === 'https' && $host === 'registry.npmjs.org'
+        && preg_match('#^/(?:@playwright/test/-/test|playwright/-/playwright|playwright-core/-/playwright-core)-[0-9.]+\.tgz$#', $path)) {
+        return true;
+    }
+    if (in_array($relative, ['playwright.config.mjs', 'e2e/portfolio.spec.mjs', 'scripts/capture-cases.mjs'], true)
+        && $scheme === 'http' && $host === 'localhost' && ($parts['port'] ?? null) === 4187 && $path === '/') {
+        return true;
+    }
 
     if ($scheme === 'https' && $host === 'github.com') {
         return $path === '/MrPerfume' || str_starts_with($path, '/MrPerfume/measurement-portfolio');
@@ -58,7 +69,7 @@ foreach ($iterator as $entry) {
 
     if (preg_match_all('#https?://[^\s<>"\'\)\]]+#i', $contents, $matches, PREG_OFFSET_CAPTURE)) {
         foreach ($matches[0] as [$url, $offset]) {
-            if (! approvedPublicUrl($url)) {
+            if (! approvedPublicUrl($url, $relative)) {
                 $line = substr_count(substr($contents, 0, $offset), "\n") + 1;
                 $violations[] = "{$relative}:{$line}: unexpected public URL {$url}";
             }

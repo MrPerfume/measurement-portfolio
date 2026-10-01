@@ -1,0 +1,11 @@
+{
+  "name": "measurement-portfolio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test site/tests/*.test.mjs",
+    "test:e2e": "bash scripts/build-pages.sh && playwright test",
+    "capture": "bash scripts/build-pages.sh && node scripts/capture-cases.mjs && bash scripts/build-pages.sh"
+  },
+  "devDependencies": { "@playwright/test": "1.63.0" }
+}
