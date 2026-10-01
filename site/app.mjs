@@ -27,6 +27,15 @@ function focusDemo() {
   reveal(document.querySelector('#demo-title'), 'start');
 }
 
+// 同文档片段跳转也可能触发历史事件；统一在原生定位后按当前地址收口，
+// 避免前一次平滑滚动或延迟聚焦把最新的工程证据入口拉回演示区。
+function alignPageAnchor() {
+  requestAnimationFrame(() => {
+    if (location.hash === '#demo' || (!location.hash && scenarioIds.has(new URL(location.href).searchParams.get('scenario')))) focusDemo();
+    else if (['#top', '#evidence'].includes(location.hash)) document.querySelector(location.hash).scrollIntoView({ behavior: 'instant', block: 'start' });
+  });
+}
+
 function reveal(element, block = 'nearest') {
   element.focus({ preventScroll: true });
   element.scrollIntoView({ behavior: 'instant', block });
@@ -140,10 +149,8 @@ document.addEventListener('click', (event) => {
 
 state = reduceDemo(state, { type: ACTIONS.SET_SCENARIO, scenario: scenarioFromUrl() });
 render();
-// 原生片段定位在加载末尾执行；等待它完成，避免覆盖直达入口的键盘焦点。
-if (scenarioIds.has(new URL(location.href).searchParams.get('scenario')) && (!location.hash || location.hash === '#demo')) {
-  window.addEventListener('load', () => requestAnimationFrame(focusDemo), { once: true });
-}
+window.addEventListener('load', alignPageAnchor, { once: true });
+window.addEventListener('hashchange', alignPageAnchor);
 
 window.addEventListener('popstate', () => {
   const scenario = scenarioFromUrl();
@@ -151,5 +158,5 @@ window.addEventListener('popstate', () => {
     state = reduceDemo(state, { type: ACTIONS.SET_SCENARIO, scenario });
     render();
   }
-  if (location.hash === '#demo') focusDemo();
+  alignPageAnchor();
 });
