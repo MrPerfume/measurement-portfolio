@@ -79,12 +79,17 @@ foreach (['01-weekly.png', '02-returns.png', '03-review.png'] as $case) {
     assertPage($xpath->query('//img[@src="'.$path.'" and contains(@alt,"交互原型")]')->length === 1, "Missing image source label for {$case}.");
 }
 
+preg_match('/src="app\.mjs\?v=([a-f0-9]{16})"/', $index, $versionMatch);
+assertPage(isset($versionMatch[1]), 'Entry module needs a content version.');
+$version = $versionMatch[1];
+assertPage(str_contains($index, 'href="styles.css?v='.$version.'"'), 'Styles must use the same content version.');
 foreach (['app.mjs', 'state.mjs', 'views.mjs', 'domain/common.mjs', 'domain/physical.mjs', 'domain/weekly.mjs', 'domain/certificates.mjs'] as $module) {
     $source = file_get_contents($dist.'/'.$module);
     assertPage($source !== false, "Missing module {$module}.");
     preg_match_all('/from\s+[\'"](\.[^\'"]+)[\'"]/', $source, $imports);
     foreach ($imports[1] as $import) {
-        assertPage(is_file(dirname($dist.'/'.$module).'/'.$import), "Broken module import in {$module}.");
+        assertPage(parse_url($import, PHP_URL_QUERY) === 'v='.$version, "Unversioned dependency in {$module}.");
+        assertPage(is_file(dirname($dist.'/'.$module).'/'.parse_url($import, PHP_URL_PATH)), "Broken module import in {$module}.");
     }
 }
 

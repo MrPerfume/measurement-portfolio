@@ -1,5 +1,9 @@
 # 工程证据与验证结果
 
+## 当前发布记录
+
+2026-10-01 六场景版本已通过 PR/CI/Pages 发布；发布后识别并补充旧缓存兼容修订。实际版本、部署与核验边界见[公开发布复核](INTERACTION_QA.md#publication-20261001)及 [Pages](https://github.com/MrPerfume/measurement-portfolio/actions/workflows/pages.yml)。下方“本地候选、未发布”等表述均为对应历史阶段状态，不代表后续版本。
+
 ## 2026-10-01 求职表达与场景入口候选
 
 本地 PHP 8.4.25、Node.js 24.18.0、锁定 Playwright 1.63.0。`bash scripts/verify.sh`：20 项 PHP / 57 个断言、35 项 Node 及构建/公开边界通过；`npm run test:e2e`：30 项通过（10 个流程 × 三视口）。新增两类导航测试，覆盖六场景直达、无效参数、旧锚点、历史往返、草稿/角色/事实保留、刷新和重置；未扩写业务状态模型。`git diff --check` 通过。详见[当次验收](INTERACTION_QA.md#entry-20261001)。
