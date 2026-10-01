@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
   <meta name="theme-color" content="#f7f8fa">
-  <meta name="description" content="从计量管理员到计量数字化管理者：通过脱敏交互原型展示计划外送检、在检跟进、证书复核与审计闭环。">
+  <meta name="description" content="从计量管理员到计量数字化管理者：交互体验周报检、分批取回、连续证书复核与事实闭环。">
   <meta name="robots" content="index,follow">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'; form-action 'none'">
   <meta property="og:type" content="website">
@@ -41,7 +41,7 @@
       <div class="hero-copy">
         <p class="eyebrow">从计量管理员到计量数字化管理者</p>
         <h1 id="hero-title"><span>把现场规则，变成</span><span>可执行的管理系统</span></h1>
-        <p class="hero-lede">我把设备台账、送检、证书和异常协同中容易失真的现场事实，整理成可追踪、可解释、可审计的数字化流程。工业软件实施与产品顾问，是这套能力可以继续迁移的方向。</p>
+        <p class="hero-lede">面向设备与质量数字化管理、工业软件实施岗位。主导现场需求、业务规则与验收，借助 AI 完成原型与测试，把跨部门协作中的问题转化为可执行流程。</p>
         <div class="hero-actions">
           <a class="button button-primary" href="#demo">进入交互演示</a>
           <a class="button button-secondary" href="https://github.com/MrPerfume/measurement-portfolio" target="_blank" rel="noreferrer">查看公开源码 <span aria-hidden="true">↗</span></a>
@@ -68,8 +68,8 @@
           <strong>事实可证明后才流转</strong>
         </div>
         <div class="evidence-strip" aria-label="公开可验证数据">
-          <div><strong>20</strong><span>领域测试</span></div>
-          <div><strong>57</strong><span>公开断言</span></div>
+          <div><strong>6</strong><span>交互场景</span></div>
+          <div><strong>2</strong><span>业务分支</span></div>
           <div><strong>3</strong><span>角色视角</span></div>
         </div>
       </div>
@@ -79,16 +79,19 @@
       <div class="section-heading compact-heading">
         <div>
           <p class="eyebrow">Calibration trace</p>
-          <h2 id="rail-title">一条业务事实，如何走到闭环</h2>
+          <h2 id="rail-title">两条业务路径，各自留下真实依据</h2>
         </div>
-        <p>点击刻度，直接进入对应演示。</p>
+        <p>点击入口开始体验。现场到场与实物外送分别推进，共用证书和审计。</p>
       </div>
-      <div class="calibration-rail" aria-label="业务流程刻度">
-        <button type="button" data-scenario="intake"><span>01</span><strong>实物接收</strong><small>计划外也能留证</small></button>
-        <button type="button" data-scenario="lab"><span>02</span><strong>送出在检</strong><small>按真实轮次汇总</small></button>
-        <button type="button" data-scenario="lab"><span>03</span><strong>到期跟进</strong><small>45 天首次提醒</small></button>
-        <button type="button" data-scenario="certificate"><span>04</span><strong>证书复核</strong><small>冲突阻断猜测</small></button>
-        <button type="button" data-scenario="audit"><span>05</span><strong>审计闭环</strong><small>决定都有依据</small></button>
+      <div class="branch-rail" aria-label="业务分支导航">
+        <div><span>现场协同</span><button type="button" data-scenario="weekly">周报检 → 排期 → 分次到场</button><small>预约不等于已经执行</small></div>
+        <div><span>实物外送</span><button type="button" data-scenario="intake">计划外收件</button><button type="button" data-scenario="lab">在检跟进</button><button type="button" data-scenario="returns">取回与领取</button></div>
+        <div><span>共同闭环</span><button type="button" data-scenario="certificate">连续证书复核</button><button type="button" data-scenario="audit">审计与证据回看</button><small>实物、结果、证书分别确认</small></div>
+      </div>
+      <div class="contribution">
+        <div><strong>我负责什么</strong><p>主导现场需求、业务规则与验收，AI 辅助代码和测试。</p></div>
+        <div><strong>AI 如何协作</strong><p>辅助代码与测试实现；业务判断和验收责任由我承担。</p></div>
+        <div><strong>目前验证到哪一步</strong><p>测试与演示阶段。有自动化及浏览器证据，不宣称生产成效或合规认证。</p></div>
       </div>
     </section>
 
@@ -96,17 +99,22 @@
       <div class="section-heading">
         <div>
           <p class="eyebrow">Interactive case</p>
-          <h2 id="demo-title">亲手走一遍脱敏业务闭环</h2>
+          <h2 id="demo-title" tabindex="-1">亲手走一遍脱敏业务闭环</h2>
         </div>
         <p>所有按钮只改变当前页面内存；不读取真实数据，也不会发送任何消息。</p>
       </div>
 
+      <div class="demo-guide">
+        <p>推荐先体验：分批取回 → 查看剩余在检数量 → 查看审计记录。</p>
+        <button class="button button-secondary" type="button" data-scenario="returns">从分批取回开始</button>
+      </div>
       <div class="role-switcher" aria-label="切换观察视角">
         <span>观察视角</span>
         <div id="role-buttons" class="segmented-control"></div>
         <p id="role-description"></p>
         <button class="reset-button" type="button" data-action="reset">重置演示</button>
       </div>
+      <p id="demo-reference" class="demo-reference"></p>
 
       <div class="demo-shell">
         <aside class="demo-sidebar" aria-label="演示场景">
@@ -132,21 +140,59 @@
               <span id="event-count">1 条事件</span>
             </div>
           </div>
+          <div id="notice-region" class="feedback is-empty" role="status" aria-live="polite" aria-atomic="true"></div>
           <div id="scenario-content" class="scenario-content" tabindex="-1"></div>
           <noscript><p class="noscript-message">交互演示需要启用 JavaScript；工程文档与截图画廊仍可直接阅读。</p></noscript>
         </div>
       </div>
 
-      <div id="notice-region" class="notice" role="status" aria-live="polite" aria-atomic="true" hidden></div>
+      <p class="demo-boundary">完整系统范围：撤销、返工、跨周补充单、真实签名链接、身份鉴权与并发数据库不在本原型中模拟；这里只验证合成状态下的业务判断。</p>
     </section>
 
     <section class="evidence-section" id="evidence" aria-labelledby="evidence-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">Decisions in practice · v1.1</p><h2>从现场问题，到可以验证的决定</h2></div>
+        <p>以下三个案例可直接操作。原型只展示业务不变量，不代替完整系统。</p>
+      </div>
+      <div class="case-stories">
+        <article><span class="case-tag">现场协同</span><h3>一次报检，多次到场</h3><p><strong>问题</strong> 排期会变，部分设备先到场，整单状态容易失真。</p><p><strong>判断</strong> 冻结报送范围，分开记录建议、预约、到场与结果。</p><button class="button button-secondary" type="button" data-scenario="weekly">体验周报检</button><p class="case-proof">验证：旧建议拒绝覆盖、分次清单去重、结果与证书闭环。</p><a class="case-screenshot" href="assets/cases/01-weekly.png" target="_blank" rel="noreferrer"><img src="assets/cases/01-weekly.png" alt="交互原型：周单冻结范围、正式预约及分次到场统计" width="1440" height="1000" loading="lazy"></a><small class="case-source">交互原型 · 本公开站点合成数据截图 · 点击查看原图</small></article>
+        <article><span class="case-tag">实物交接</span><h3>同批送出，不同方式取回</h3><p><strong>问题</strong> 有的设备回计量室，有的由使用部门直接领取。</p><p><strong>判断</strong> 逐台记录实际去向，直领不制造中间待领取记录。</p><button class="button button-secondary" type="button" data-scenario="returns">体验双路径取回</button><p class="case-proof">验证：混合去向、缺少领取资料阻断、数量跨页一致。</p><a class="case-screenshot" href="assets/cases/02-returns.png" target="_blank" rel="noreferrer"><img src="assets/cases/02-returns.png" alt="交互原型：混合去向数量与取回、领取任务入口" width="1440" height="1000" loading="lazy"></a><small class="case-source">交互原型 · 本公开站点合成数据截图 · 点击查看原图</small></article>
+        <article><span class="case-tag">单人工作流</span><h3>连续复核，保留判断上下文</h3><p><strong>问题</strong> 反复进出详情，容易丢失进度，也容易把关联当作完成。</p><p><strong>判断</strong> 一份一份确认，评分、关联、结果分别表达。</p><button class="button button-secondary" type="button" data-scenario="certificate">体验连续复核</button><p class="case-proof">验证：重复提交、跳过保留待办、失败保留输入。</p><a class="case-screenshot" href="assets/cases/03-review.png" target="_blank" rel="noreferrer"><img src="assets/cases/03-review.png" alt="交互原型：连续证书队列、候选依据与人工复核工作区" width="1440" height="1000" loading="lazy"></a><small class="case-source">交互原型 · 本公开站点合成数据截图 · 点击查看原图</small></article>
+      </div>
+      <section class="recent-practice" aria-labelledby="recent-practice-title">
+        <div class="section-heading">
+          <div><p class="eyebrow">Recent practice</p><h2 id="recent-practice-title">近期业务实践</h2></div>
+          <p>完整系统案例说明 · 非本站可操作功能</p>
+        </div>
+        <div class="practice-grid">
+          <article>
+            <span class="case-tag">跨部门协同</span>
+            <h3>部门进度通报与预计领取安排</h3>
+            <p><strong>现场问题</strong> 同批设备进度不同，统一通报容易混入其他部门信息，也容易把预计时间误解为已经可以领取。</p>
+            <p><strong>业务判断</strong> 按部门隔离清单，分开表达在检、已回和待领取；预计领取安排只作参考，不替代实物确认。发送前冻结预览，内容变化后重新核对，重复提交不重复生成投递。</p>
+            <p class="practice-limit"><strong>验证与限制</strong> 已做本地模拟验证，覆盖范围隔离、预览变化和重复提交；不代表真实通知已发送。这里只说明完整系统的业务判断，不提供通知或领取安排操作。</p>
+          </article>
+          <article>
+            <span class="case-tag">移动端信息组织</span>
+            <h3>移动端只读排检清单</h3>
+            <p><strong>现场问题</strong> 手机查看排检清单时，过长页头、零值统计和无效分页会挤走当前任务，筛选后的列表也容易被误认为完整下载范围。</p>
+            <p><strong>业务判断</strong> 当前任务优先，压缩首屏占位，保留设备与位置依据；搜索、筛选和下载分别说明作用范围，只有一页时隐藏分页，避免把只读查阅变成反复跳转。</p>
+            <p class="practice-limit"><strong>验证与限制</strong> 已做浏览器模拟手机验收，不等于真机或钉钉验收；不公开真实清单或签名链接。这里只介绍完整系统的信息组织，不新增移动清单演示。</p>
+          </article>
+        </div>
+      </section>
+      <article class="performance-case">
+        <div><p class="eyebrow">Measured, with boundaries</p><h3>一次可解释的证书页性能优化</h3><p>定位到行菜单重复计算，优化局部渲染，同时保留原有权限判断。</p></div>
+        <div><strong>584.23 <span>→</span> 430.38 <small>ms</small></strong><p>应用处理中位数改善约 26.3%</p></div>
+        <p class="performance-note">私有系统 2026-09-05 本地同环境对照，首轮单列、后五次预热样本取中位数；证书列表实际 20 行。公开不可复现的历史自述，不是生产收益、INP、P95 或 SLA，也不包含 OCR 和真实 PDF 解析。</p>
+      </article>
+      <p class="demo-boundary">2026-09-15 本地公开验证：20 项 PHP 测试（57 个断言）、35 项 Node 状态测试、24 项 Chromium 端到端测试（三个视口），包含连续处理上下文与可见反馈。各套件范围不同，不与私有验证累计；本轮尚未公开发布，远端 CI 待发布授权后执行。</p>
       <div class="section-heading">
         <div>
           <p class="eyebrow">Visible evidence</p>
           <h2 id="evidence-title">界面覆盖面与公开证据</h2>
         </div>
-        <p>截图全部来自隔离演示环境，使用合成编号、角色和数量。</p>
+        <p>以下六张为后台隔离环境的合成截图，不是上方交互原型截图；不代表生产数据。</p>
       </div>
 
       <div class="gallery">
