@@ -4,7 +4,7 @@
 
 [展示页](https://mrperfume.github.io/measurement-portfolio/) · [业务案例](docs/BUSINESS_FLOWS.md) · [工程证据](docs/ENGINEERING_EVIDENCE.md) · [GitHub Profile](https://github.com/MrPerfume)
 
-当前公开版本：**2026-10-11 更新已发布**，见[发布与展示核验](https://github.com/MrPerfume/measurement-portfolio/pull/7#issuecomment-6106231985)。本轮招聘表达与导航优化为本地候选，验证与发布状态见[本轮记录](docs/INTERACTION_QA.md#recruiter-20261011)；[历史发布](docs/INTERACTION_QA.md#publication-20261001)单独保留，不用旧成功代替新候选通过。
+当前版本记录：**2026-10-11 招聘表达与证据导航更新**。[发布与线上核验回执](https://github.com/MrPerfume/measurement-portfolio/pull/8#issuecomment-6106737059)统一记录实际部署版本、CI 和验收状态；[本轮本地验证](docs/INTERACTION_QA.md#recruiter-20261011)与[历史发布](docs/INTERACTION_QA.md#publication-20261001)分别保留，不把本地成功当作已上线。
 
 ## 我负责什么
 
@@ -26,7 +26,7 @@
 
 ## 验证与边界
 
-最新已发布基线的公开验证为 **20 项 PHP／57 个断言、35 项 Node、33 项 Chromium**。本轮候选结果另列在[工程证据](docs/ENGINEERING_EVIDENCE.md)和[交互验收](docs/INTERACTION_QA.md#recruiter-20261011)，不累计历次数量。PHP 验证既有领域内核，Node 与浏览器验证六场景及导航；演示只使用合成数据与内存，无登录、数据库、上传、接口、统计或持久化。
+本轮公开验证为 **20 项 PHP／57 个断言、36 项 Node、36 项 Chromium**，见[工程证据](docs/ENGINEERING_EVIDENCE.md)和[交互验收](docs/INTERACTION_QA.md#recruiter-20261011)，不累计历次数量。PHP 验证既有领域内核，Node 与浏览器验证六场景及导航；演示只使用合成数据与内存，无登录、数据库、上传、接口、统计或持久化。
 
 固定演示时刻为 2026-09-07 17:00（北京时间）；角色是分工模拟，非身份鉴权。刷新恢复初始数据并进入链接指定场景，重置恢复默认场景。
 

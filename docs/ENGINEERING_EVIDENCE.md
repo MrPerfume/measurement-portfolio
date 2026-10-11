@@ -2,7 +2,7 @@
 
 ## 当前发布记录
 
-**2026-10-11 更新已发布**：[PR #7 发布回执](https://github.com/MrPerfume/measurement-portfolio/pull/7#issuecomment-6106231985)，公开基线 `441938e` 的 [Verify](https://github.com/MrPerfume/measurement-portfolio/actions/runs/38117718291) 与 [Pages](https://github.com/MrPerfume/measurement-portfolio/actions/runs/38117718321) 成功，线上资源与代表操作核验完成。历史日期不改写，本轮候选不借用基线的成功结果。
+**2026-10-11 招聘表达与证据导航更新**：以 [PR #8 发布与线上核验回执](https://github.com/MrPerfume/measurement-portfolio/pull/8#issuecomment-6106737059)为实际部署版本、CI、线上操作和个人主页更新的统一状态入口。本地验证和历史记录分开，未完成的发布阶段不会提前记为成功。
 
 ## 从业务判断核实我的贡献
 
@@ -14,13 +14,15 @@
 | 预约与实际到场分别记录 | [周单演示](https://mrperfume.github.io/measurement-portfolio/?scenario=weekly#demo)、[业务规则](BUSINESS_FLOWS.md#1-周报检与分次到场) | 待确认建议不覆盖预约；分次到场去重；结果与证书单独完成 |
 | 匹配建议不替代人工确认 | [连续复核](https://mrperfume.github.io/measurement-portfolio/?scenario=certificate#demo)、[浏览器测试](../e2e/portfolio.spec.mjs) | 重复确认不多记；失败保留输入；成功推进下一份 |
 
-## 当前候选与验证边界
+## 本轮验证与覆盖边界
 
-招聘表达与证据导航优化以 `441938e` 为基线，当前为本地候选。实际本地验证为 **20 项 PHP／57 个断言、36 项 Node、36 项 Chromium**，构建、引用与公开边界通过；见[本轮验收](INTERACTION_QA.md#recruiter-20261011)。合入、Pages 与线上核验另以发布回执为准。
+招聘表达与证据导航优化以 `441938e` 为基线。实际本地验证为 **20 项 PHP／57 个断言、36 项 Node、36 项 Chromium**，构建、引用与公开边界通过；见[本轮验收](INTERACTION_QA.md#recruiter-20261011)。合入、Pages 与线上核验另以上方发布回执为准。
 
 公开 PHP 套件验证既有领域内核，不覆盖全部新增流程；Node 状态机与 Chromium 验证合成六场景、导航和错误恢复。私有系统的性能、测试站和完整功能记录属于历史自述，不能由本站复现，不与公开测试累计。下方“未发布”等描述只表示对应历史阶段。
 
 ## 历史发布与验证记录
+
+2026-10-11 首屏与近期案例修订经 PR #7 发布为 `441938e`，[Verify](https://github.com/MrPerfume/measurement-portfolio/actions/runs/38117718291) 与 [Pages](https://github.com/MrPerfume/measurement-portfolio/actions/runs/38117718321) 成功，线上资源与代表操作核验见[当次回执](https://github.com/MrPerfume/measurement-portfolio/pull/7#issuecomment-6106231985)。本轮不借用该版本的成功结果。
 
 2026-10-01 六场景经 PR #5 发布，PR #6 完成旧缓存兼容修订；最终公开版本 `8369409` 的 [Verify](https://github.com/MrPerfume/measurement-portfolio/actions/runs/36809794510) 与 [Pages](https://github.com/MrPerfume/measurement-portfolio/actions/runs/36809794498) 成功。公开套件为 **20 项 PHP／57 个断言、35 项 Node、33 项 Chromium**；见[当次发布复核](INTERACTION_QA.md#publication-20261001)。
 
