@@ -8,7 +8,7 @@ export function weeklyAction(state, action) {
   switch (action.type) {
     case 'createWeekly': {
       requireRule(!week.published, '发布范围已冻结，不能修改。');
-      const groups = ids(action.groupIds);
+      const groups = ids(action.groupIds, '请选择本次报检的计划组。');
       requireRule(groups.every((id) => data.groups.some((group) => group.id === id)), '计划组不存在。');
       const scope = data.groups.filter((group) => groups.includes(group.id)).flatMap((group) => group.items.map((item) => item.id));
       if (JSON.stringify(week.scopeIds) === JSON.stringify(scope)) return '草稿范围未变。';

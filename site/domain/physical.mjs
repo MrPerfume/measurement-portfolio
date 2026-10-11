@@ -41,7 +41,7 @@ export function physicalAction(state, action) {
     }
     case 'registerReturn':
     case 'confirmPickup': {
-      const selected = ids(action.itemIds);
+      const selected = ids(action.itemIds, action.type === 'confirmPickup' ? '请选择本次领取的设备。' : '请选择本次取回的设备。');
       const round = state.labRecords.find((item) => item.id === action.recordId);
       requireRule(round && selected.every((id) => round.itemIds.includes(id)), '选择超出了当前送出轮次。');
       const items = selected.map((id) => object(state, id));

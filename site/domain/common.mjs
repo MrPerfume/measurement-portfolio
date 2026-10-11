@@ -2,8 +2,8 @@ export const clone = (value) => structuredClone(value);
 export function requireRule(condition, message) {
   if (!condition) throw new Error(message);
 }
-export function ids(value) {
-  requireRule(Array.isArray(value) && value.length > 0, '请至少选择一台设备或一个计划组。');
+export function ids(value, emptyMessage = '请至少选择一台设备。') {
+  requireRule(Array.isArray(value) && value.length > 0, emptyMessage);
   requireRule(value.every((id) => typeof id === 'string' && id.trim() === id && id !== ''), '选择包含无效标识。');
   requireRule(new Set(value).size === value.length, '选择包含重复项，请重新选择。');
   return [...value].sort();

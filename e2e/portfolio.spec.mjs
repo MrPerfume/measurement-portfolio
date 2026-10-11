@@ -71,6 +71,46 @@ test('地址导航保留角色草稿与事实，刷新和重置恢复初始状�
   expect(new URL(page.url()).searchParams.has('scenario')).toBe(false);
 });
 
+test('招聘阅读入口前置，锚点往返和案例导航不改业务会话', async ({ page }, testInfo) => {
+  await expect(page.locator('#cases')).toBeAttached();
+  expect(await page.locator('#cases').evaluate((element) => Boolean(element.compareDocumentPosition(document.querySelector('#demo')) & Node.DOCUMENT_POSITION_FOLLOWING))).toBe(true);
+  await page.getByRole('link', { name: '先看代表案例', exact: true }).click();
+  await expectInWorkingViewport(page.locator('#cases-title'));
+  await expect(page.locator('#cases-title')).toBeFocused();
+  await page.screenshot({ path: 'output/playwright/recruiter-20261011/raw/' + testInfo.project.name + '-cases.png' });
+  for (const [name, title] of [['体验周报检', '周报检'], ['体验双路径取回', '取回与领取'], ['体验连续复核', '连续复核']]) {
+    await page.getByRole('button', { name, exact: true }).click();
+    await expect(page.locator('#workspace-title')).toHaveText(title);
+    await expect(page.locator('#event-count')).toHaveText('1 条事件');
+    await page.goBack();
+    await expect(page).toHaveURL(/#cases$/);
+    await expectInWorkingViewport(page.locator('#cases-title'));
+  }
+  await page.getByRole('button', { name: '从分批取回开始', exact: true }).click();
+  await expect(page.locator('#demo-guide-text')).toContainText('从 2 变 1');
+  await page.getByLabel('当前送出轮次', { exact: true }).selectOption('DEMO-ROUND-0045');
+  await expect(page.locator('#demo-guide-text')).not.toContainText('从 2 变 1');
+  await page.getByLabel('当前送出轮次', { exact: true }).selectOption('DEMO-ROUND-0044');
+  await expect(page.locator('#demo-guide-text')).toContainText('从 2 变 1');
+  const transfer = form(page, '登记交接');
+  await transfer.getByLabel('演示在检仪表 1', { exact: false }).check();
+  await transfer.getByLabel('交接方式', { exact: true }).selectOption('metering');
+  await transfer.getByRole('button', { name: '登记取回', exact: true }).click();
+  await expect(page.locator('#demo-guide-text')).not.toContainText('从 2 变 1');
+  const events = await page.locator('#event-count').textContent();
+  await transfer.getByLabel('实际交接时间（北京时间）').fill(reference + 'T15:10');
+  await role(page, '管理者');
+  await page.getByRole('link', { name: '查看验证依据', exact: true }).click();
+  await expectInWorkingViewport(page.locator('#evidence-title'));
+  await expect(page.locator('#evidence-title')).toBeFocused();
+  await page.goBack();
+  await expect(page.locator('#role-buttons [aria-pressed="true"]')).toHaveText('管理者');
+  await expect(page.locator('#event-count')).toHaveText(events);
+  await expect(transfer.getByLabel('实际交接时间（北京时间）')).toHaveValue(reference + 'T15:10');
+  await page.getByRole('button', { name: '重置演示', exact: true }).click();
+  await expect(page.locator('#demo-guide-text')).toContainText('从 2 变 1');
+});
+
 // 可见不等于在视口内：防止操作成功后只剩按钮、对象标题和失败原因滚出屏幕。
 async function expectInWorkingViewport(locator) {
   await expect(locator).toBeInViewport();
@@ -309,7 +349,7 @@ test('交接失败可见，取回与领取只展示各自可操作设备', async
   await nav(page, '取回与领取');
   const transfer = form(page, '登记交接');
   await transfer.getByRole('button', { name: '登记取回', exact: true }).click();
-  await expect(status(page)).toContainText('至少选择');
+  await expect(status(page)).toHaveText('请选择本次取回的设备。');
   await expectInWorkingViewport(status(page));
   await expect(status(page)).toBeFocused();
   await transfer.getByLabel('演示在检仪表 1', { exact: false }).check();
@@ -349,7 +389,7 @@ test('多计划组同屏时失败反馈归属实际提交的预约', async ({ pa
   const pressure = form(page, '核对实际到场 · 压力仪表组');
   const temperature = form(page, '核对实际到场 · 温度仪表组');
   await temperature.getByRole('button', { name: '确认本次到场', exact: true }).click();
-  await expect(temperature.locator('#notice-region')).toContainText('至少选择');
+  await expect(temperature.locator('#notice-region')).toHaveText('请至少选择一台设备。');
   await expect(pressure.locator('#notice-region')).toHaveCount(0);
   await expectInWorkingViewport(status(page));
   await expect(page.locator('#notice-region')).toHaveCount(1);
