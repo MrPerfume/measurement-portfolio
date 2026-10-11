@@ -48,6 +48,12 @@ const handoff = {
   receiver: '演示领取人甲', department: '演示使用部门一', at: '2026-09-07T14:00'
 };
 
+test('空选择提示对应取回、领取和计划组，失败不改变事实', () => {
+  assert.equal(denied(initial(), 'registerReturn', { ...handoff, itemIds: [] }).notice.message, '请选择本次取回的设备。');
+  assert.equal(denied(initial(), 'confirmPickup', { ...handoff, itemIds: [] }).notice.message, '请选择本次领取的设备。');
+  assert.equal(denied(initial(), 'createWeekly', { groupIds: [] }).notice.message, '请选择本次报检的计划组。');
+});
+
 test('回归：本次送出立即增加检测方轮次，引用接收明细而非副本', () => {
   const state = sent();
   assert.equal(state.labRecords.length, data.lab.records.length + 1);

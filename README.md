@@ -4,21 +4,21 @@
 
 [展示页](https://mrperfume.github.io/measurement-portfolio/) · [业务案例](docs/BUSINESS_FLOWS.md) · [工程证据](docs/ENGINEERING_EVIDENCE.md) · [GitHub Profile](https://github.com/MrPerfume)
 
-六场景版本于 **2026-10-01** 经 [PR #5](https://github.com/MrPerfume/measurement-portfolio/pull/5) 发布，随后 [PR #6](https://github.com/MrPerfume/measurement-portfolio/pull/6) 修复旧缓存兼容；最终版本 `8369409` 的 CI、Pages 与线上核验完成，详见[发布复核](docs/INTERACTION_QA.md#publication-20261001)。最新内容修订与本地验证见[10 月同步记录](docs/INTERACTION_QA.md#refresh-20261011)，其实际上线结果以 [Pages 工作流](https://github.com/MrPerfume/measurement-portfolio/actions/workflows/pages.yml) 为准。
+当前公开版本：**2026-10-11 更新已发布**，见[发布与展示核验](https://github.com/MrPerfume/measurement-portfolio/pull/7#issuecomment-6106231985)。本轮招聘表达与导航优化为本地候选，验证与发布状态见[本轮记录](docs/INTERACTION_QA.md#recruiter-20261011)；[历史发布](docs/INTERACTION_QA.md#publication-20261001)单独保留，不用旧成功代替新候选通过。
 
 ## 我负责什么
 
-主导现场需求、业务规则与验收，AI 辅助代码和测试；业务判断与验收责任由我承担。把设备、实物、结果、证书与责任证据串成可追溯流程，不用按钮或匹配高分替代实际事实。当前为测试与演示阶段，不宣称生产收益、合规认证或完整系统已全面验收。
+主导现场需求、业务规则与验收，AI 辅助代码和测试。我负责明确现场问题、定义事实边界和验收条件：预约不能替代到场，交接不能补造结果，高分不能替代人工确认。不宣称生产收益、合规认证或完整系统已全面验收。
 
 ## 先体验一个案例
 
-推荐路线：分批取回 → 查看剩余在检数量 → 查看审计记录。
+先看[三个代表案例](https://mrperfume.github.io/measurement-portfolio/#cases)，再按兴趣操作。初始取回样例：勾选一台 → 选择“取回计量室” → 登记 → 查看在检从 2 变 1 → 查看审计。已操作会话以当前明细为准，不自动重置。
 
-| 代表案例 | 要验证的判断 | 在线入口 |
+| 代表案例 | 我的规则与验收重点 | 在线入口 |
 | --- | --- | --- |
-| 同批送出，不同方式取回 | 逐台记录去向，未选设备仍在检 | [分批取回](https://mrperfume.github.io/measurement-portfolio/?scenario=returns#demo) |
-| 一次报检，多次到场 | 预约不替代到场，建议不覆盖正式安排 | [周报检](https://mrperfume.github.io/measurement-portfolio/?scenario=weekly#demo) |
-| 单人连续证书复核 | 匹配只是建议，关联不等于完成 | [连续复核](https://mrperfume.github.io/measurement-portfolio/?scenario=certificate#demo) |
+| 同批送出，不同方式取回 | 不整批关闭；逐台记录去向，剩余数量和审计一致 | [分批取回](https://mrperfume.github.io/measurement-portfolio/?scenario=returns#demo) |
+| 一次报检，多次到场 | 拆分预约与到场；待确认改期不覆盖原预约，重复到场被阻断 | [周报检](https://mrperfume.github.io/measurement-portfolio/?scenario=weekly#demo) |
+| 单人连续证书复核 | 拆分建议、关联与完成；重复确认不多记，失败保留输入 | [连续复核](https://mrperfume.github.io/measurement-portfolio/?scenario=certificate#demo) |
 
 六场景、两条分支、三个角色保持不变。详细规则、交互原型截图与原后台六图见[业务说明](docs/BUSINESS_FLOWS.md)。
 
@@ -26,7 +26,7 @@
 
 ## 验证与边界
 
-10 月 1 日最终发布验证为 **20 项 PHP／57 个断言、35 项 Node、33 项 Chromium**。最新候选与历史结果分别记录在[工程证据](docs/ENGINEERING_EVIDENCE.md)和[交互验收](docs/INTERACTION_QA.md)，不累计历次测试数量。演示全部使用合成数据与浏览器内存，无登录、数据库、上传、远程接口、统计或持久化。
+最新已发布基线的公开验证为 **20 项 PHP／57 个断言、35 项 Node、33 项 Chromium**。本轮候选结果另列在[工程证据](docs/ENGINEERING_EVIDENCE.md)和[交互验收](docs/INTERACTION_QA.md#recruiter-20261011)，不累计历次数量。PHP 验证既有领域内核，Node 与浏览器验证六场景及导航；演示只使用合成数据与内存，无登录、数据库、上传、接口、统计或持久化。
 
 固定演示时刻为 2026-09-07 17:00（北京时间）；角色是分工模拟，非身份鉴权。刷新恢复初始数据并进入链接指定场景，重置恢复默认场景。
 
