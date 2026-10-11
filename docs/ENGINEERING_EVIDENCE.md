@@ -2,7 +2,7 @@
 
 ## 当前发布记录
 
-**2026-10-11 演示引导与推荐案例收口**：本轮候选范围与验证见[本轮验收](INTERACTION_QA.md#guide-20261011)。实际合入、CI、Pages 与个人主页 README 的发布结果另记发布回执，不将本地通过当作已上线；上一公开版本见 [PR #8 回执](https://github.com/MrPerfume/measurement-portfolio/pull/8#issuecomment-6106737059)。
+**2026-10-11 演示引导与推荐案例收口**：本轮范围与验证见[本轮验收](INTERACTION_QA.md#guide-20261011)。实际合入、CI、Pages 与个人主页 README 的发布结果统一见 [PR #9 发布回执](https://github.com/MrPerfume/measurement-portfolio/pull/9#issuecomment-6107206105)，以回执实际完成阶段为准，不将本地通过当作已上线；上一公开版本见 [PR #8 回执](https://github.com/MrPerfume/measurement-portfolio/pull/8#issuecomment-6106737059)。
 
 ## 从业务判断核实我的贡献
 
