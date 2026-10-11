@@ -1,6 +1,7 @@
 import { ACTIONS, createInitialState, reduceDemo } from './state.mjs';
 import { esc, renderers } from './views.mjs';
 import { taskGuidance } from './guidance.mjs';
+import { transferSummary } from './feedback.mjs';
 
 const data = JSON.parse(document.querySelector('#demo-data').content.textContent);
 let state = createInitialState(data);
@@ -10,6 +11,8 @@ notice.tabIndex = -1;
 const uiTypes = new Set(['setRole', 'setScenario', 'setContext', 'selectCertificate', 'selectCandidate', 'reset']);
 const defaultScenario = state.activeScenario;
 const scenarioIds = new Set(data.scenarios.map((item) => item.id));
+let transferResult = null;
+let auditFocus = null;
 const scenarioFromUrl = () => {
   const value = new URL(location.href).searchParams.get('scenario');
   return scenarioIds.has(value) ? value : defaultScenario;
@@ -21,18 +24,30 @@ function writeScenarioUrl(reset = false) {
   if (reset) url.searchParams.delete('scenario');
   else url.searchParams.set('scenario', state.activeScenario);
   url.hash = 'demo';
-  if (url.href !== location.href) history.pushState(null, '', url);
+  // 历史只标记介绍/工作区定位，不存角色、对象、草稿、反馈或业务状态。
+  const view = { portfolioView: reset ? 'intro' : 'workspace' };
+  if (url.href !== location.href) history.pushState(view, '', url);
+  else history.replaceState(view, '', url);
 }
 
 function focusDemo() {
   reveal(document.querySelector('#demo-title'), 'start');
 }
 
+function focusWorkspace() {
+  const entry = state.activeScenario === 'audit' && auditFocus
+    ? content.querySelector('[data-event-id="' + auditFocus.eventId + '"]') : null;
+  reveal(entry || document.querySelector('#workspace-title'), 'start');
+}
+
 // 同文档片段跳转也可能触发历史事件；统一在原生定位后按当前地址收口，
 // 避免前一次平滑滚动或延迟聚焦把最新的工程证据入口拉回演示区。
 function alignPageAnchor() {
   requestAnimationFrame(() => {
-    if (location.hash === '#demo' || (!location.hash && scenarioIds.has(new URL(location.href).searchParams.get('scenario')))) focusDemo();
+    if (location.hash === '#demo' || (!location.hash && scenarioIds.has(new URL(location.href).searchParams.get('scenario')))) {
+      if (history.state?.portfolioView === 'workspace') focusWorkspace();
+      else focusDemo();
+    }
     else if (['#cases', '#evidence'].includes(location.hash)) reveal(document.querySelector(location.hash + '-title'), 'start');
     else if (location.hash === '#top') document.querySelector('#top').scrollIntoView({ behavior: 'instant', block: 'start' });
   });
@@ -66,14 +81,26 @@ function render(focusContent = false, context = {}) {
   document.querySelector('#event-count').textContent = state.events.length + ' 条事件';
   // 只保留一个 live region；重绘前移出，避免在旧表单内被销毁或产生重复提示。
   notice.remove();
-  content.innerHTML = renderers[state.activeScenario](state);
+  content.innerHTML = renderers[state.activeScenario](state, { auditEventId: auditFocus?.eventId });
   let feedbackKey = context.formKey;
   if (state.activeScenario === 'certificate') feedbackKey = context.reviewChanged ? 'review-start' : 'review-actions';
   const slot = feedbackKey && content.querySelector('[data-feedback="' + feedbackKey + '"]');
   if (slot) slot.append(notice);
   else content.prepend(notice);
   notice.className = state.notice ? 'feedback feedback-' + state.notice.tone : 'feedback is-empty';
-  notice.textContent = state.notice?.message || '';
+  const summary = state.activeScenario === 'returns' && transferResult?.roundId === state.ui.roundId && state.notice?.tone === 'success' ? transferResult : null;
+  notice.textContent = summary?.message || state.notice?.message || '';
+  if (summary?.eventId) {
+    const reference = document.createElement('small');
+    reference.textContent = summary.roundId + ' · ' + summary.receiptId;
+    notice.append(reference);
+    const auditButton = document.createElement('button');
+    auditButton.type = 'button';
+    auditButton.className = 'button button-secondary';
+    auditButton.dataset.action = 'viewTransferAudit';
+    auditButton.textContent = '查看本次审计';
+    notice.append(auditButton);
+  }
   document.querySelector('#demo-reference').textContent = '固定演示时刻 ' + state.data.meta.referenceDate + ' 17:00（北京时间） · 刷新恢复 · 分工模拟，非真实鉴权';
   updateGuidance();
   const currentHeading = content.querySelector('.review-current h4');
@@ -86,13 +113,23 @@ function render(focusContent = false, context = {}) {
   }
 }
 
-function dispatch(action, focus = false, formKey) {
+function dispatch(action, focus = false, formKey, navigation = {}) {
+  const before = state;
   const certificateId = state.ui.certificateId;
   state = reduceDemo(state, action);
+  if (!uiTypes.has(action.type)) {
+    transferResult = transferSummary(before, state, action);
+    auditFocus = null;
+  } else if (action.type === ACTIONS.SET_CONTEXT || action.type === ACTIONS.RESET
+      || (action.type === ACTIONS.SET_SCENARIO && !navigation.audit)) {
+    transferResult = null;
+    auditFocus = null;
+  }
   render(focus, { actionType: action.type, formKey, reviewChanged: state.activeScenario === 'certificate' && (certificateId !== state.ui.certificateId || action.type === 'selectCertificate') });
   if (action.type === ACTIONS.SET_SCENARIO || action.type === 'reset') {
     writeScenarioUrl(action.type === 'reset');
-    focusDemo();
+    if (action.type === 'reset') focusDemo();
+    else focusWorkspace();
   }
 }
 
@@ -134,6 +171,17 @@ document.addEventListener('submit', (event) => {
 });
 
 document.addEventListener('click', (event) => {
+  const anchor = event.target.closest('a[href^="#"]');
+  if (anchor && !event.ctrlKey && !event.metaKey && !event.shiftKey && !event.altKey
+      && event.button === 0 && ['#top', '#cases', '#demo', '#evidence'].includes(anchor.hash)) {
+    event.preventDefault();
+    const url = new URL(anchor.href);
+    const view = { portfolioView: 'intro' };
+    if (url.href !== location.href) history.pushState(view, '', url);
+    else history.replaceState(view, '', url);
+    alignPageAnchor();
+    return;
+  }
   const target = event.target.closest('button');
   if (!target || target.disabled || target.type === 'submit') return;
   const type = target.dataset.action;
@@ -144,6 +192,16 @@ document.addEventListener('click', (event) => {
   }
   if (!type) return;
   const payload = JSON.parse(target.dataset.payload || '{}');
+  if (type === 'viewTransferAudit') {
+    if (!transferResult?.eventId || !state.events.some((entry) => entry.id === transferResult.eventId)) return;
+    auditFocus = { eventId: transferResult.eventId, roundId: transferResult.roundId };
+    dispatch({ type: ACTIONS.SET_SCENARIO, scenario: 'audit' }, false, undefined, { audit: true });
+    return;
+  }
+  if (type === 'returnToReturns') {
+    dispatch({ type: ACTIONS.SET_SCENARIO, scenario: 'returns' });
+    return;
+  }
   if (type === 'focusTask') {
     const heading = content.querySelector('form[data-form="' + payload.form + '"] legend');
     if (heading) reveal(heading, 'start');
@@ -159,6 +217,8 @@ document.addEventListener('click', (event) => {
 });
 
 state = reduceDemo(state, { type: ACTIONS.SET_SCENARIO, scenario: scenarioFromUrl() });
+// 刷新总是完整初始化；即使上一历史条目来自内部导航，首次加载仍显示介绍。
+history.replaceState({ portfolioView: 'intro' }, '', location.href);
 render();
 window.addEventListener('load', alignPageAnchor, { once: true });
 window.addEventListener('hashchange', alignPageAnchor);

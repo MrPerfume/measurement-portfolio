@@ -672,7 +672,7 @@ main {
 
 .segmented-control button,
 .reset-button {
-  min-height: 34px;
+  min-height: 44px;
   padding: 7px 10px;
   border: 0;
   border-radius: 7px;
@@ -2323,7 +2323,12 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
 .feedback-neutral { border-left-color: var(--blue); background: var(--blue-soft); }
 .feedback.is-empty { display: none; }
 /* 根元素已有 96px 滚动留白；这里只补 16px，避免叠加两份固定页头高度。 */
-.scenario-content, .review-current h4, .case-panel legend, .feedback { scroll-margin-block: 16px 24px; }
+.scenario-content, #workspace-title, .event-list li, .review-current h4, .case-panel legend, .feedback { scroll-margin-block: 16px 24px; }
+#workspace-title:focus-visible, .event-list li:focus-visible { outline: 2px solid var(--blue); outline-offset: 5px; }
+.feedback > small { display: block; margin-top: 8px; overflow-wrap: anywhere; }
+.feedback > .button { margin-top: 12px; min-height: 44px; }
+.event-list li.is-highlighted { padding-inline: 12px; border: 1px solid var(--blue); border-radius: 10px; background: var(--blue-soft); }
+.event-list .audit-marker { display: block; margin-bottom: 6px; color: var(--blue); font-weight: 700; }
 .review-current h4:focus-visible, .case-panel legend:focus-visible, .feedback:focus-visible { outline: 2px solid var(--blue); outline-offset: 5px; }
 [data-feedback]:has(.feedback:not(.is-empty)) { margin: 16px 0; }
 .task-summary { padding: 0 0 14px; border-bottom: 1px solid var(--line); }
@@ -2357,7 +2362,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
 .event-list p { margin: 8px 0; color: var(--ink-soft); }
 .event-list small { overflow-wrap: anywhere; }
 .case-stories { margin: 30px 0 42px; }
-#demo-title { scroll-margin-top: 120px; }
+#demo-title { scroll-margin-top: 16px; }
 #cases-title, #evidence-title { scroll-margin-top: 16px; }
 .cases-section h2 span { display: inline-block; }
 #cases-title:focus-visible, #evidence-title:focus-visible { outline: 2px solid var(--blue); outline-offset: 5px; }
@@ -2412,6 +2417,11 @@ input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px
   .contribution > div { padding: 16px 0; }
 }
 @media (max-width: 620px) {
+  .demo-section .section-heading { gap: 12px; margin-bottom: 20px; }
+  .demo-guide { gap: 12px; margin-bottom: 16px; padding: 16px; }
+  .role-switcher { gap: 8px; padding: 12px; }
+  .role-switcher > p { margin-top: 0; }
+  .role-switcher button { min-height: 44px; }
   .form-grid, .choice-list, .case-columns, .round-grid, .performance-case { grid-template-columns: 1fr; }
   .case-panel { padding: 16px; }
   .feedback { padding: 14px; }

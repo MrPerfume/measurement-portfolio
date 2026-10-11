@@ -83,7 +83,7 @@ preg_match('/src="app\.mjs\?v=([a-f0-9]{16})"/', $index, $versionMatch);
 assertPage(isset($versionMatch[1]), 'Entry module needs a content version.');
 $version = $versionMatch[1];
 assertPage(str_contains($index, 'href="styles.css?v='.$version.'"'), 'Styles must use the same content version.');
-foreach (['app.mjs', 'state.mjs', 'views.mjs', 'guidance.mjs', 'domain/common.mjs', 'domain/physical.mjs', 'domain/weekly.mjs', 'domain/certificates.mjs'] as $module) {
+foreach (['app.mjs', 'state.mjs', 'views.mjs', 'guidance.mjs', 'feedback.mjs', 'domain/common.mjs', 'domain/physical.mjs', 'domain/weekly.mjs', 'domain/certificates.mjs'] as $module) {
     $source = file_get_contents($dist.'/'.$module);
     assertPage($source !== false, "Missing module {$module}.");
     preg_match_all('/from\s+[\'"](\.[^\'"]+)[\'"]/', $source, $imports);
