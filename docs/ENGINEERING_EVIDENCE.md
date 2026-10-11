@@ -2,7 +2,7 @@
 
 ## 当前发布记录
 
-**2026-10-11 手机场景定位与交接反馈优化**：范围与本地结果见[本轮验收](INTERACTION_QA.md#mobile-feedback-20261011)。当前准备按已授权范围提交 PR；实际合入、CI、Pages 与线上核验分阶段记录，不将本地通过当作已上线。个人主页 README、Bio、Website、置顶顺序和其他项目保持不变。
+**2026-10-11 手机场景定位与交接反馈优化**：范围与本地结果见[本轮验收](INTERACTION_QA.md#mobile-feedback-20261011)。实际合入、CI、Pages 与线上核验统一见 [PR #10 发布回执](https://github.com/MrPerfume/measurement-portfolio/pull/10#issuecomment-6107838567)，以回执实际完成阶段为准，不将本地通过当作已上线。个人主页 README、Bio、Website、置顶顺序和其他项目保持不变。
 
 ## 从业务判断核实我的贡献
 
