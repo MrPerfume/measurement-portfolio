@@ -78,7 +78,7 @@ $embeddedData = json_encode(
         | JSON_HEX_APOS
         | JSON_HEX_QUOT,
 );
-$assets = ['styles.css', 'app.mjs', 'state.mjs', 'views.mjs', 'domain/common.mjs', 'domain/physical.mjs', 'domain/weekly.mjs', 'domain/certificates.mjs', 'favicon.svg'];
+$assets = ['styles.css', 'app.mjs', 'state.mjs', 'views.mjs', 'guidance.mjs', 'domain/common.mjs', 'domain/physical.mjs', 'domain/weekly.mjs', 'domain/certificates.mjs', 'favicon.svg'];
 // HTML 与整个模块依赖图使用同一内容版本，避免旧浏览器缓存混用新版合成契约。
 $fingerprint = hash_init('sha256');
 hash_update($fingerprint, $template.$embeddedData);

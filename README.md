@@ -4,7 +4,7 @@
 
 [展示页](https://mrperfume.github.io/measurement-portfolio/) · [业务案例](docs/BUSINESS_FLOWS.md) · [工程证据](docs/ENGINEERING_EVIDENCE.md) · [GitHub Profile](https://github.com/MrPerfume)
 
-当前版本记录：**2026-10-11 招聘表达与证据导航更新**。[发布与线上核验回执](https://github.com/MrPerfume/measurement-portfolio/pull/8#issuecomment-6106737059)统一记录实际部署版本、CI 和验收状态；[本轮本地验证](docs/INTERACTION_QA.md#recruiter-20261011)与[历史发布](docs/INTERACTION_QA.md#publication-20261001)分别保留，不把本地成功当作已上线。
+版本记录：**2026-10-11 演示引导与推荐案例收口**。[当前发布记录](docs/ENGINEERING_EVIDENCE.md#当前发布记录)统一链接实际部署、CI 和核验回执；[本轮本地验证](docs/INTERACTION_QA.md#guide-20261011)与[历史发布](docs/INTERACTION_QA.md#publication-20261001)分别保留，不把本地成功当作已上线。
 
 ## 我负责什么
 
@@ -12,7 +12,7 @@
 
 ## 先体验一个案例
 
-先看[三个代表案例](https://mrperfume.github.io/measurement-portfolio/#cases)，再按兴趣操作。初始取回样例：勾选一台 → 选择“取回计量室” → 登记 → 查看在检从 2 变 1 → 查看审计。已操作会话以当前明细为准，不自动重置。
+先看[三个代表案例](https://mrperfume.github.io/measurement-portfolio/#cases)，推荐从分批取回开始，再体验周报检与连续复核。初始管理员取回样例：勾选一台 → 选择“取回计量室” → 登记 → 查看在检从 2 变 1 → 查看审计。页面将推荐路线与当前任务分开，提示随场景、角色和处理状态更新；已操作会话以当前明细为准，不自动重置。
 
 | 代表案例 | 我的规则与验收重点 | 在线入口 |
 | --- | --- | --- |
@@ -26,7 +26,7 @@
 
 ## 验证与边界
 
-本轮公开验证为 **20 项 PHP／57 个断言、36 项 Node、36 项 Chromium**，见[工程证据](docs/ENGINEERING_EVIDENCE.md)和[交互验收](docs/INTERACTION_QA.md#recruiter-20261011)，不累计历次数量。PHP 验证既有领域内核，Node 与浏览器验证六场景及导航；演示只使用合成数据与内存，无登录、数据库、上传、接口、统计或持久化。
+本轮公开验证为 **20 项 PHP／57 个断言、42 项 Node、42 项 Chromium**，见[工程证据](docs/ENGINEERING_EVIDENCE.md)和[交互验收](docs/INTERACTION_QA.md#guide-20261011)，不累计历次数量。PHP 验证既有领域内核，Node 与浏览器验证六场景、导航及只读任务引导；演示只使用合成数据与内存，无登录、数据库、上传、接口、统计或持久化。
 
 固定演示时刻为 2026-09-07 17:00（北京时间）；角色是分工模拟，非身份鉴权。刷新恢复初始数据并进入链接指定场景，重置恢复默认场景。
 

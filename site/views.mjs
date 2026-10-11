@@ -181,7 +181,7 @@ export function renderCertificate(state) {
       (selected.status !== 'pending' ? '<p class="outcome outcome-success">已保存：' + (selected.status === 'confirmed' ? '人工复核确认' : '仅确认关联，结果尚未确认') + '。候选切换不会覆盖此事实。</p>' : '') +
       '<label class="form-label"><span>复核备注（仅保存在本页）</span><textarea data-cert-field="note" rows="2"' + (editable ? '' : ' disabled') + '>' + esc(selected.draft.note) + '</textarea></label>' +
       '<label class="confirm-line"><input type="checkbox" data-cert-field="humanConfirmed"' + checked(selected.draft.humanConfirmed) + (editable ? '' : ' disabled') + '><span>我已人工核对日期、结论与证据（合成演示）</span></label>' +
-      '<p class="action-context">当前处理：' + esc(selected.id) + '</p>' + feedbackSlot('review-actions') +
+      '<p class="action-context">当前处理：' + esc(selected.id) + '</p><p id="review-next-step" class="task-hint"></p>' + feedbackSlot('review-actions') +
       '<div class="inline-actions review-actions">' + button('执行匹配检查', 'checkMatch', payload, editable) +
       button('仅确认关联', 'confirmLink', payload, editable) +
       button('确认复核并推进结果', 'confirmCertificate', payload, editable, 'button-primary') +

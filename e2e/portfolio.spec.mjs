@@ -73,6 +73,7 @@ test('地址导航保留角色草稿与事实，刷新和重置恢复初始状�
 
 test('招聘阅读入口前置，锚点往返和案例导航不改业务会话', async ({ page }, testInfo) => {
   await expect(page.locator('#cases')).toBeAttached();
+  await expect(page.locator('#cases .case-stories h3')).toHaveText(['同批送出，不同方式取回', '一次报检，多次到场', '连续复核，保留判断上下文']);
   expect(await page.locator('#cases').evaluate((element) => Boolean(element.compareDocumentPosition(document.querySelector('#demo')) & Node.DOCUMENT_POSITION_FOLLOWING))).toBe(true);
   await page.getByRole('link', { name: '先看代表案例', exact: true }).click();
   await expectInWorkingViewport(page.locator('#cases-title'));
@@ -108,7 +109,51 @@ test('招聘阅读入口前置，锚点往返和案例导航不改业务会话',
   await expect(page.locator('#event-count')).toHaveText(events);
   await expect(transfer.getByLabel('实际交接时间（北京时间）')).toHaveValue(reference + 'T15:10');
   await page.getByRole('button', { name: '重置演示', exact: true }).click();
-  await expect(page.locator('#demo-guide-text')).toContainText('从 2 变 1');
+  await expect(page.locator('#demo-guide-text')).toContainText('接收正常设备');
+  await expect(page.locator('#demo-guide-text')).not.toContainText('从 2 变 1');
+});
+
+test('引导随场景与角色变化，查看导航不新增事实', async ({ page }) => {
+  const guide = page.locator('#demo-guide-text');
+  await expect(guide).toContainText('接收正常设备');
+  for (const [label, keyword] of [['周报检', '周单'], ['计划外收件', '接收'], ['在检跟进', '轮次'], ['取回与领取', '取回'], ['连续复核', '匹配检查'], ['审计闭环', '审计']]) {
+    await nav(page, label);
+    await role(page, '计量管理员');
+    await expect(guide).toContainText(keyword);
+    if (label !== '取回与领取') await expect(guide).not.toContainText('从 2 变 1');
+    await role(page, '管理者');
+    await expect(guide).toContainText('管理者只读');
+    await expect(guide).not.toContainText('从 2 变 1');
+    await role(page, '检测方');
+    await expect(guide).toContainText('检测方视角');
+    await expect(guide).not.toContainText('从 2 变 1');
+    await expect(page.locator('#event-count')).toHaveText('1 条事件');
+  }
+});
+
+test('连续复核下一步按当前候选更新，输入与焦点保持', async ({ page }) => {
+  await nav(page, '连续复核');
+  const guide = page.locator('#demo-guide-text');
+  const note = page.getByLabel('复核备注（仅保存在本页）');
+  const human = page.getByRole('checkbox', { name: '我已人工核对日期、结论与证据（合成演示）' });
+  await expect(guide).toContainText('先对当前候选执行匹配检查');
+  await note.fill('合成材料核对备注');
+  await expect(note).toBeFocused();
+  await scope(page).getByRole('button', { name: '执行匹配检查', exact: true }).click();
+  await expect(guide).toContainText('人工核对');
+  await human.check();
+  await expect(guide).toContainText('可确认复核并推进结果');
+  await expect(human).toBeFocused();
+  await expect(note).toHaveValue('合成材料核对备注');
+  await scope(page).getByRole('button', { name: /78 另一合成候选/ }).click();
+  await expect(guide).toContainText('冲突');
+  await scope(page).getByRole('button', { name: /96 演示在检仪表 1/ }).click();
+  await expect(guide).toContainText('可确认复核并推进结果');
+  await scope(page).getByRole('button', { name: '确认复核并推进结果', exact: true }).click();
+  await expect(scope(page).getByRole('heading', { name: '复核工作区 · DEMO-CERT-002' })).toBeFocused();
+  await expect(guide).toContainText('先对当前候选执行匹配检查');
+  await page.getByRole('button', { name: /DEMO-CERT-001 演示在检仪表 1 已确认/ }).click();
+  await expect(guide).toContainText('已确认');
 });
 
 // 可见不等于在视口内：防止操作成功后只剩按钮、对象标题和失败原因滚出屏幕。

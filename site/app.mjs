@@ -1,5 +1,6 @@
 import { ACTIONS, createInitialState, reduceDemo } from './state.mjs';
 import { esc, renderers } from './views.mjs';
+import { taskGuidance } from './guidance.mjs';
 
 const data = JSON.parse(document.querySelector('#demo-data').content.textContent);
 let state = createInitialState(data);
@@ -42,6 +43,13 @@ function reveal(element, block = 'nearest') {
   element.scrollIntoView({ behavior: 'instant', block });
 }
 
+// 输入事件只更新提示文本，不重建表单、移动焦点或改变业务事实。
+function updateGuidance() {
+  document.querySelector('#demo-guide-text').textContent = taskGuidance(state);
+  const reviewHint = document.querySelector('#review-next-step');
+  if (reviewHint) reviewHint.textContent = taskGuidance(state);
+}
+
 function render(focusContent = false, context = {}) {
   const active = document.activeElement;
   const focusAction = active?.dataset.action;
@@ -67,10 +75,7 @@ function render(focusContent = false, context = {}) {
   notice.className = state.notice ? 'feedback feedback-' + state.notice.tone : 'feedback is-empty';
   notice.textContent = state.notice?.message || '';
   document.querySelector('#demo-reference').textContent = '固定演示时刻 ' + state.data.meta.referenceDate + ' 17:00（北京时间） · 刷新恢复 · 分工模拟，非真实鉴权';
-  // 指引不写入业务状态；操作后或换轮次不再把初始样例数量当成当前承诺。
-  document.querySelector('#demo-guide-text').textContent = state.revision === 0 && state.ui.roundId === state.data.lab.records[0].id
-    ? '初始样例：勾选一台设备 → 选择“取回计量室” → 登记取回 → 查看在检数量从 2 变 1 → 查看审计记录。'
-    : '继续体验：在当前轮次勾选本次交接的设备 → 明确实际去向 → 登记 → 查看剩余在检数量与审计。数量以当前明细为准；入口保留角色、对象与草稿。';
+  updateGuidance();
   const currentHeading = content.querySelector('.review-current h4');
   if (context.reviewChanged && currentHeading) reveal(currentHeading, 'start');
   else if (state.notice && context.actionType && !uiTypes.has(context.actionType)) reveal(notice);
@@ -107,6 +112,7 @@ document.addEventListener('input', (event) => {
     const form = target.closest('form[data-form]');
     if (form) state = reduceDemo(state, { type: ACTIONS.EDIT_FORM, form: form.dataset.form, values: values(form) });
   }
+  updateGuidance();
 });
 
 document.addEventListener('change', (event) => {

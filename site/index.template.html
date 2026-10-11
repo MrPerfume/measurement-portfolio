@@ -83,8 +83,8 @@
         <p>先读判断，再按兴趣体验。我的职责是现场需求、业务规则与验收，AI 辅助代码和测试。</p>
       </div>
       <div class="case-stories">
+        <article><span class="case-tag">推荐先体验 · 实物交接 · 规则设计</span><h3>同批送出，不同方式取回</h3><p><strong>现场问题</strong> 有的设备回计量室，有的由部门直领，还有设备继续在检。</p><p><strong>我的判断</strong> 不用整批关闭掩盖剩余设备；逐台定义实际去向，直领不制造中间待领取事实。</p><p class="case-proof"><strong>验收依据</strong> 取回一台后剩余数量跨页一致；缺资料整次失败；审计只记录实际交接。</p><button class="button button-secondary" type="button" data-scenario="returns">体验双路径取回</button><a class="case-screenshot" href="assets/cases/02-returns.png" target="_blank" rel="noreferrer"><img src="assets/cases/02-returns.png" alt="交互原型：混合去向数量与取回、领取任务入口" width="1440" height="1000" loading="lazy"></a><small class="case-source">交互原型 · 本公开站点合成数据截图 · 点击查看原图</small></article>
         <article><span class="case-tag">现场协同 · 流程梳理</span><h3>一次报检，多次到场</h3><p><strong>现场问题</strong> 排期会变，设备分次到场，整单状态容易失真。</p><p><strong>我的判断</strong> 不用一次预约代表整组执行；定义冻结范围，将建议、正式预约、到场与结果分开。</p><p class="case-proof"><strong>验收依据</strong> 待确认改期不覆盖原预约；重复到场被阻断；全部结果和证书完成才闭环。</p><button class="button button-secondary" type="button" data-scenario="weekly">体验周报检</button><a class="case-screenshot" href="assets/cases/01-weekly.png" target="_blank" rel="noreferrer"><img src="assets/cases/01-weekly.png" alt="交互原型：周单冻结范围、正式预约及分次到场统计" width="1440" height="1000" loading="lazy"></a><small class="case-source">交互原型 · 本公开站点合成数据截图 · 点击查看原图</small></article>
-        <article><span class="case-tag">实物交接 · 规则设计</span><h3>同批送出，不同方式取回</h3><p><strong>现场问题</strong> 有的设备回计量室，有的由部门直领，还有设备继续在检。</p><p><strong>我的判断</strong> 不用整批关闭掩盖剩余设备；逐台定义实际去向，直领不制造中间待领取事实。</p><p class="case-proof"><strong>验收依据</strong> 取回一台后剩余数量跨页一致；缺资料整次失败；审计只记录实际交接。</p><button class="button button-secondary" type="button" data-scenario="returns">体验双路径取回</button><a class="case-screenshot" href="assets/cases/02-returns.png" target="_blank" rel="noreferrer"><img src="assets/cases/02-returns.png" alt="交互原型：混合去向数量与取回、领取任务入口" width="1440" height="1000" loading="lazy"></a><small class="case-source">交互原型 · 本公开站点合成数据截图 · 点击查看原图</small></article>
         <article><span class="case-tag">单人工作流 · 验收设计</span><h3>连续复核，保留判断上下文</h3><p><strong>现场问题</strong> 反复进出详情容易丢进度，也容易把关联当作完成。</p><p><strong>我的判断</strong> 不让高分替代人工确认；区分匹配建议、确认关联与复核完成，失败和跳过保留待办。</p><p class="case-proof"><strong>验收依据</strong> 重复确认不多记事实；失败保留输入；成功定位下一份，返回仍保留上下文。</p><button class="button button-secondary" type="button" data-scenario="certificate">体验连续复核</button><a class="case-screenshot" href="assets/cases/03-review.png" target="_blank" rel="noreferrer"><img src="assets/cases/03-review.png" alt="交互原型：连续证书队列、候选依据与人工复核工作区" width="1440" height="1000" loading="lazy"></a><small class="case-source">交互原型 · 本公开站点合成数据截图 · 点击查看原图</small></article>
       </div>
       <p class="case-route"><a href="#demo">进入完整演示</a><span aria-hidden="true"> · </span><a href="#evidence">查看验证依据</a></p>
@@ -120,7 +120,7 @@
       </div>
 
       <div class="demo-guide">
-        <p id="demo-guide-text">初始样例：勾选一台设备 → 选择“取回计量室” → 登记取回 → 查看在检数量从 2 变 1 → 查看审计记录。</p>
+        <p>推荐先体验：分批取回 → 查看剩余在检数量 → 查看审计记录。</p>
         <button class="button button-secondary" type="button" data-scenario="returns">从分批取回开始</button>
       </div>
       <div class="role-switcher" aria-label="切换观察视角">
@@ -130,6 +130,7 @@
         <button class="reset-button" type="button" data-action="reset">重置演示</button>
       </div>
       <p id="demo-reference" class="demo-reference"></p>
+      <p class="task-hint"><strong>当前任务</strong> <span id="demo-guide-text">加载当前场景与分工提示。</span></p>
 
       <div class="demo-shell">
         <aside class="demo-sidebar" aria-label="演示场景">
@@ -203,7 +204,7 @@
         <p>先看规则对应的测试与限制，再查看完整系统的合成界面。</p>
       </div>
 
-      <p class="demo-boundary">版本记录：2026-10-11 · 招聘表达与证据导航更新。<a href="https://github.com/MrPerfume/measurement-portfolio/pull/8#issuecomment-6106737059" target="_blank" rel="noreferrer">发布与线上核验回执</a>记录实际部署及验收状态；<a href="https://github.com/MrPerfume/measurement-portfolio/blob/main/docs/INTERACTION_QA.md#recruiter-20261011" target="_blank" rel="noreferrer">本轮公开验证</a>为 20 项 PHP／57 个断言、36 项 Node、36 项 Chromium。各套件范围不同，不与私有历史验证累计。</p>
+      <p class="demo-boundary">版本记录：2026-10-11 · 演示引导与推荐案例收口。<a href="https://github.com/MrPerfume/measurement-portfolio/blob/main/docs/ENGINEERING_EVIDENCE.md#当前发布记录" target="_blank" rel="noreferrer">当前发布记录</a>链接实际部署及验收回执；<a href="https://github.com/MrPerfume/measurement-portfolio/blob/main/docs/INTERACTION_QA.md#guide-20261011" target="_blank" rel="noreferrer">本轮公开验证</a>为 20 项 PHP／57 个断言、42 项 Node、42 项 Chromium。各套件范围不同，不与私有历史验证累计。</p>
       <div class="evidence-links">
         <a href="https://github.com/MrPerfume/measurement-portfolio/blob/main/docs/ENGINEERING_EVIDENCE.md" target="_blank" rel="noreferrer"><span>工程证据</span><strong>业务判断 → 验收依据 → 覆盖边界 <b aria-hidden="true">↗</b></strong></a>
         <a href="https://github.com/MrPerfume/measurement-portfolio/blob/main/docs/BUSINESS_FLOWS.md" target="_blank" rel="noreferrer"><span>业务流程</span><strong>从设备台账到审计闭环 <b aria-hidden="true">↗</b></strong></a>
