@@ -191,7 +191,7 @@ export function renderCertificate(state) {
   return switcher + roleHint(state) + '<div class="review-layout">' + detail + queue + '</div>' + rule('检查、关联、确认是三个不同的动作', '成功后进入下一份；失败保留输入，跳过不关闭待办。证书确认不等于实物已经领取。');
 }
 
-export function renderAudit(state) {
+export function renderAudit(state, { auditEventId = null } = {}) {
   const weeklyItems = state.weekly.scopeIds.map((id) => object(state, id));
   const groups = [
     ['现场周单', progress(weeklyItems)],
@@ -200,7 +200,7 @@ export function renderAudit(state) {
   ];
   return rule('每种闭环都有自己的完成条件', '现场看结果与证书，外送还要看实际领取；分数、预约或一次点击都不能代替事实。') +
     '<div class="round-grid">' + groups.map(([name, value]) => card(name, '<p>范围 ' + value.total + ' · 结果 ' + value.executed + ' · 证书 ' + value.certified + '</p><strong>整体闭环 ' + value.closed + ' / ' + value.total + '</strong>')).join('') + '</div>' +
-    card('可追溯事件 · ' + state.events.length + ' 条', '<ol class="event-list">' + state.events.map((entry) => '<li><span>' + esc(entry.id) + '</span><div><strong>' + esc(entry.title) + '</strong><p>' + esc(entry.detail) + '</p><small>' + esc(entry.objectId) + '</small></div></li>').join('') + '</ol>');
+    card('可追溯事件 · ' + state.events.length + ' 条', '<ol class="event-list">' + state.events.map((entry) => '<li data-event-id="' + esc(entry.id) + '" tabindex="-1"' + (entry.id === auditEventId ? ' class="is-highlighted"' : '') + '><span>' + esc(entry.id) + '</span><div>' + (entry.id === auditEventId ? '<small class="audit-marker">本次交接</small>' : '') + '<strong>' + esc(entry.title) + '</strong><p>' + esc(entry.detail) + '</p><small>' + esc(entry.objectId) + '</small>' + (entry.id === auditEventId ? '<div class="inline-actions">' + button('返回取回与领取', 'returnToReturns') + '</div>' : '') + '</div></li>').join('') + '</ol>');
 }
 
 export const renderers = { weekly: renderWeekly, intake: renderIntake, lab: renderLab, returns: renderReturns, certificate: renderCertificate, audit: renderAudit };
