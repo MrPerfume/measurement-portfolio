@@ -2,7 +2,7 @@
 
 ## 当前发布记录
 
-**2026-10-11 招聘表达与证据导航更新**：以 [PR #8 发布与线上核验回执](https://github.com/MrPerfume/measurement-portfolio/pull/8#issuecomment-6106737059)为实际部署版本、CI、线上操作和个人主页更新的统一状态入口。本地验证和历史记录分开，未完成的发布阶段不会提前记为成功。
+**2026-10-11 演示引导与推荐案例收口**：本轮范围与验证见[本轮验收](INTERACTION_QA.md#guide-20261011)。实际合入、CI、Pages 与个人主页 README 的发布结果统一见 [PR #9 发布回执](https://github.com/MrPerfume/measurement-portfolio/pull/9#issuecomment-6107206105)，以回执实际完成阶段为准，不将本地通过当作已上线；上一公开版本见 [PR #8 回执](https://github.com/MrPerfume/measurement-portfolio/pull/8#issuecomment-6106737059)。
 
 ## 从业务判断核实我的贡献
 
@@ -10,13 +10,13 @@
 
 | 我的判断与验收责任 | 公开核实入口 | 能证明什么 |
 | --- | --- | --- |
-| 逐台记录交接，不整批关闭 | [取回演示](https://mrperfume.github.io/measurement-portfolio/?scenario=returns#demo)、[状态测试](../site/tests/state.test.mjs) | 剩余在检数量一致；失败不产生部分事实；直领不制造待领取 |
-| 预约与实际到场分别记录 | [周单演示](https://mrperfume.github.io/measurement-portfolio/?scenario=weekly#demo)、[业务规则](BUSINESS_FLOWS.md#1-周报检与分次到场) | 待确认建议不覆盖预约；分次到场去重；结果与证书单独完成 |
-| 匹配建议不替代人工确认 | [连续复核](https://mrperfume.github.io/measurement-portfolio/?scenario=certificate#demo)、[浏览器测试](../e2e/portfolio.spec.mjs) | 重复确认不多记；失败保留输入；成功推进下一份 |
+| 逐台记录交接，不整批关闭 | [取回演示](https://mrperfume.github.io/measurement-portfolio/?scenario=returns#demo)、[用例：同批分次混合去向](../site/tests/state.test.mjs#L129) | 剩余在检数量一致；直领不制造待领取 |
+| 预约与实际到场分别记录 | [周单演示](https://mrperfume.github.io/measurement-portfolio/?scenario=weekly#demo)、[用例：待确认或拒绝改期](../site/tests/state.test.mjs#L168)、[分次到场](../site/tests/state.test.mjs#L187) | 待确认建议不覆盖预约；重复到场被阻断；结果与证书单独完成 |
+| 匹配建议不替代人工确认 | [连续复核](https://mrperfume.github.io/measurement-portfolio/?scenario=certificate#demo)、[用例：确认结果须人工核对](../site/tests/state.test.mjs#L214)、[浏览器：候选与焦点](../e2e/portfolio.spec.mjs#L134) | 重复确认不多记；失败保留输入；成功推进下一份 |
 
 ## 本轮验证与覆盖边界
 
-招聘表达与证据导航优化以 `441938e` 为基线。实际本地验证为 **20 项 PHP／57 个断言、36 项 Node、36 项 Chromium**，构建、引用与公开边界通过；见[本轮验收](INTERACTION_QA.md#recruiter-20261011)。合入、Pages 与线上核验另以上方发布回执为准。
+本轮以公开 `4791f55` 为基线，新增只读任务引导及变化行为测试，不改业务状态模型。最新实际结果见[本轮验收](INTERACTION_QA.md#guide-20261011)；可直接核对[六场景三角色提示测试](../site/tests/guidance.test.mjs#L23)与[浏览器角色切换测试](../e2e/portfolio.spec.mjs#L116)。复现命令见[本地体验与验证](#本地体验与验证)。
 
 公开 PHP 套件验证既有领域内核，不覆盖全部新增流程；Node 状态机与 Chromium 验证合成六场景、导航和错误恢复。私有系统的性能、测试站和完整功能记录属于历史自述，不能由本站复现，不与公开测试累计。下方“未发布”等描述只表示对应历史阶段。
 
@@ -28,7 +28,7 @@
 
 ## 2026-10-11 内容与首屏修订
 
-更新检测单位排期与分组清单说明，保留两则近期案例和原有六场景；补充证书管理工程案例，并为首屏仪表中央文字留出清晰底色。业务状态机、合成数据和公开截图未改动。当次本地验证见[同步记录](INTERACTION_QA.md#refresh-20261011)，实际上线见上方 PR #7 回执，不以历史发布结果代替后续候选。
+历史阶段：近期案例与首屏修订见[同步记录](INTERACTION_QA.md#refresh-20261011)；同日后续招聘入口修订为 20 项 PHP／57 个断言、36 项 Node、36 项 Chromium，见[验收与 PR #8 回执入口](INTERACTION_QA.md#recruiter-20261011)。不借用这些结果证明本轮候选。
 
 <a id="certificate-workflow-case"></a>
 ## 证书导入任务与人工复核（完整系统案例说明）
@@ -41,45 +41,19 @@
 
 ## 2026-10-01 求职表达与场景入口候选（历史本地记录）
 
-本地 PHP 8.4.25、Node.js 24.18.0、锁定 Playwright 1.63.0。`bash scripts/verify.sh`：20 项 PHP / 57 个断言、35 项 Node 及构建/公开边界通过；`npm run test:e2e`：30 项通过（10 个流程 × 三视口）。新增两类导航测试，覆盖六场景直达、无效参数、旧锚点、历史往返、草稿/角色/事实保留、刷新和重置；未扩写业务状态模型。`git diff --check` 通过。详见[当次验收](INTERACTION_QA.md#entry-20261001)。
-
-主导现场需求、业务规则与验收，AI 辅助代码和测试。首屏明确岗位方向，README 精选案例，完整图片与开发说明下沉；两则近期实践仍为完整系统说明，不代表本站功能或目标站全面验收。本轮未提交、推送、公开发布或修改 GitHub 元信息。下方 9 月结果保留原日期，不累计。
+当时本地候选通过 20 项 PHP／57 个断言、35 项 Node、30 项 Chromium，未提交或发布；导航覆盖、环境与后续发布分别见[当次验收](INTERACTION_QA.md#entry-20261001)及[发布复核](INTERACTION_QA.md#publication-20261001)。
 
 ## 贡献与验证边界
 
-我主导现场需求、业务规则与验收，AI 辅助代码和测试。当前是测试与演示阶段，不宣称正式生产成效。以下区分本仓库可复现验证与私有历史自述；不混合累计测试数量。
+贡献见上方映射。公开可复现验证与私有历史自述分开；公开原型不证明生产成效或完整系统全面验收。
 
 ## 2026-09-17 本地候选版复核
 
-新增两则近期业务实践说明及响应式排版，不新增交互、业务规则或测试。`bash scripts/verify.sh` 通过：20 项 PHP（57 个断言）、35 项 Node，构建、页面契约与公开边界检查通过；`npm run test:e2e` 原有 24 项全部通过。三视口新增文字区、三个案例入口和公开链接另行抽查，详见[本轮验收](INTERACTION_QA.md#refresh-20260917)。这些结果与下列 9 月 15 日历史结果分别记录，不累计数量。
-
-两则完整系统案例的本地验证属于私有历史自述，不由本站测试覆盖，不表示真实通知已发送或真机/钉钉已验收。当前仍未提交、推送或公开发布。
+当时新增两则说明，不新增交互；20 项 PHP／57 个断言、35 项 Node、24 项 Chromium 通过，仍未提交或发布。三视口抽查与私有案例边界见[当次验收](INTERACTION_QA.md#refresh-20260917)，不累计历次数量。
 
 ## 公开可复现证据（2026-09-15 历史记录）
 
-核验日期：2026-09-15（Asia/Shanghai）。本地 PHP 8.4.23、Node.js 24.18.0；Playwright 1.63.0 使用锁文件固定，Chromium 为安装工具提供的匹配版本。
-
-| 层次 | 本轮结果 | 覆盖范围 |
-| --- | --- | --- |
-| 既有 PHP 内核 | 20 项测试、57 个断言通过 | 校验状态守卫、后补证据、候选冲突、部分回件与幂等；未扩写为新流程 |
-| Node 状态机 | 35 项测试通过 | 共享明细、周单/预约/到场、双路径交接、逐证复核、角色与重置、交接草稿独立性 |
-| Chromium 端到端 | 24 项通过（8 个流程 × 3 个视口） | 1440×900、768×1024、390×844 的真实交互、焦点/视口、反馈归属和页面约束 |
-| 构建与安全 | 通过 | 24 个 PHP 文件语法、Composer 元数据、六场景契约、资源导入、敏感文本与 URL 边界 |
-| 差异格式 | 通过 | `git diff --check` |
-
-本轮仅本地交付，没有推送、PR、远端 CI 或 Pages 发布。CI 配置已加入锁定开发依赖、独立本地服务和 Chromium 测试；PHP 8.3 / 8.4 矩阵保留。远端执行结果需要后续发布授权后另行核对，不能用历史徽章替代本轮结果。
-
-复现命令：
-
-```bash
-npm ci --ignore-scripts
-npx playwright install chromium
-bash scripts/verify.sh
-npm run test:e2e
-git diff --check
-```
-
-Linux CI 通过 `npx playwright install --with-deps chromium` 安装所需系统库。仅安装阶段需要下载开发工具；运行时站点没有第三方请求。
+2026-09-15 本地 PHP 8.4.23、Node.js 24.18.0、锁定 Playwright 1.63.0：20 项 PHP／57 个断言、35 项 Node、24 项 Chromium（8 类流程 × 三视口）、构建与安全检查通过。当时仅本地交付，未推送、运行远端 CI 或发布 Pages；实际覆盖、失败复现与补验见[当次记录](INTERACTION_QA.md#2026-09-15-新案例体验优化)。
 
 ## 规则到测试的映射
 
@@ -93,10 +67,9 @@ Linux CI 通过 `npx playwright install --with-deps chromium` 安装所需系统
 | 幂等与角色守卫 | `state.mjs` | 同标识同载荷重放、不同载荷拒绝、失败可重试、管理者零事实写入 |
 | 固定演示时钟 | `data/demo.json` | 44/45 天边界、未知停发、完整重置与刷新 |
 | 操作后仍看得见当前任务 | `app.mjs`、`views.mjs` | 换份标题/焦点、就近错误、多预约反馈归属、按实物状态独立选单和任务定位 |
+| 引导不替代业务事实 | `guidance.mjs` | 六场景／三角色只读派生，当前轮次数量、复核顺序及输入焦点保持 |
 
-回归方法：先对原实现增加“送出后检测方不可见”和“复选证书候选导致重复留痕”两项失败测试，确认两项失败、原九项通过，再修改状态结构。浏览器首轮发现下拉框可访问名称混入选项文字，修复显式名称后重跑全部视口。
-
-2026-09-15 补验先复现手机端“换份标题在视口外”和“交接失败提示在视口外”，两项新增测试在修改前均失败；草稿独立性测试也先失败，再实现分离。新断言检查视口与焦点，不能用 DOM 中存在标题或提示代替用户可见。先前局部验收遗漏的原因和本次覆盖见验收记录。
+失败复现、反馈位置和补验过程归[交互验收记录](INTERACTION_QA.md)；DOM 中存在标题或提示不能代替用户可见。
 
 ## 真实浏览器与素材证据
 
@@ -146,6 +119,6 @@ npm run test:e2e
 git diff --check
 ```
 
-2026-09-15 本地结果：**20 项 PHP 测试 / 57 个断言、35 项 Node 状态测试、24 项 Chromium 端到端测试通过**，另有页面/模块/素材契约和公开边界检查。端到端为八个流程分别在 1440×900、768×1024、390×844 执行，包含当前材料/错误提示进入视口、多预约反馈归属与独立交接草稿。PHP 内核未扩写为全部新流程，新交互主要由 Node 与浏览器测试验证；不与私有测试累计。
+以本轮实际结果为准；不要将源码模板通过 `file://` 直接打开作为运行验收。Linux CI 使用 `npx playwright install --with-deps chromium` 安装浏览器依赖；运行时不需要第三方请求。
 
 `npm run capture` 可重建三张案例图与本地验收截图，并清理自身服务、浏览器和临时资料。CI 配置锁定依赖与浏览器验证；当前修订的实际执行结果见对应 PR / Actions，历史结果见[验收记录](INTERACTION_QA.md)。
