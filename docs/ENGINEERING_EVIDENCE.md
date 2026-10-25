@@ -2,7 +2,7 @@
 
 ## 当前发布记录
 
-**2026-10-11 手机场景定位与交接反馈优化**：范围与本地结果见[本轮验收](INTERACTION_QA.md#mobile-feedback-20261011)。实际合入、CI、Pages 与线上核验统一见 [PR #10 发布回执](https://github.com/MrPerfume/measurement-portfolio/pull/10#issuecomment-6107838567)，以回执实际完成阶段为准，不将本地通过当作已上线。个人主页 README、Bio、Website、置顶顺序和其他项目保持不变。
+**2026-10-25 部门协同、证书识别与台账核对说明更新**：首页新增可直达的近期实践，仓库说明同步；六场景交互、状态模型与九张历史合成图保留。检查与发布阶段见[本次记录](INTERACTION_QA.md#practice-20261025)，远端执行结果见 [Verify](https://github.com/MrPerfume/measurement-portfolio/actions/workflows/verify.yml) 与 [Pages](https://github.com/MrPerfume/measurement-portfolio/actions/workflows/pages.yml)。完整系统进展属于项目记录的摘要，不由本站测试证明。
 
 ## 从业务判断核实我的贡献
 
@@ -14,7 +14,7 @@
 | 预约与实际到场分别记录 | [周单演示](https://mrperfume.github.io/measurement-portfolio/?scenario=weekly#demo)、[用例：待确认或拒绝改期](../site/tests/state.test.mjs#L168)、[分次到场](../site/tests/state.test.mjs#L187) | 待确认建议不覆盖预约；重复到场被阻断；结果与证书单独完成 |
 | 匹配建议不替代人工确认 | [连续复核](https://mrperfume.github.io/measurement-portfolio/?scenario=certificate#demo)、[用例：确认结果须人工核对](../site/tests/state.test.mjs#L214)、[浏览器：候选与焦点](../e2e/portfolio.spec.mjs#L134) | 重复确认不多记；失败保留输入；成功推进下一份 |
 
-## 本轮验证与覆盖边界
+## 六场景交互验证与覆盖边界（2026-10-11）
 
 以公开 `dde44a5` 为基线，增加只读交接摘要与内部／外部定位，不改业务状态模型。公开实际结果为 **20 项 PHP／57 个断言、46 项 Node、48 项 Chromium**，详见[本轮验收](INTERACTION_QA.md#mobile-feedback-20261011)。可核对[交接摘要边界](../site/tests/feedback.test.mjs)、[场景定位](../e2e/portfolio.spec.mjs#L443)与[摘要／审计往返](../e2e/portfolio.spec.mjs#L481)；复现命令见[本地体验与验证](#本地体验与验证)。
 
@@ -81,13 +81,17 @@ git diff --check
 贡献见上方映射。公开可复现验证与私有历史自述分开；公开原型不证明生产成效或完整系统全面验收。
 
 <a id="certificate-workflow-case"></a>
-## 证书导入任务与人工复核（完整系统案例说明）
+## 证书识别、登记与台账差异确认（完整系统案例说明）
 
 **现场问题**：文件接收成功并不代表分析成功，批次结束也不代表每份证书已被人工确认；离开结果页后，失败对象与后续复核位置容易丢失。
 
 **业务判断**：把导入任务、逐份处理结果、人工复核和证书中心衔接起来。任务保留分页汇总与结果入口，失败保留可核对的依据，不自动重试或确认历史证据；从结果进入复核再返回原任务，保持查阅上下文。证书中心区分实际设备有效覆盖与应收证归档，不用上传数量替代业务完成。
 
 **验证与限制**：2026-10-01 证书中心与相关上传能力已有测试站管理员桌面／模拟手机只读检查；10 月 3 日导入任务、原生复核／中心与历史认定入口完成本地专项、代表性角色及测试站管理员双端只读检查。真实失败和历史待认定项仍保留，没有自动认定或声称全部处理完成。该记录属于私有历史自述，公开原型仅演示合成材料的连续复核，不覆盖真实上传、PDF/OCR、完整权限或数据库流程。
+
+**2026-10-25 新进展**：证书识别、登记与台账核对迭代已整合、合入并交付测试站。PDF 字段提取／OCR 后先核对设备身份和日期，保留未识别、冲突及待确认清单；台账变更先预览差异，由人工确认后执行，执行时复查权限与并发变化，符合条件才允许撤回。原始检测记录、车间台账与实际送检轮次分开管理，保留来源和历史身份。
+
+本人主导这些需求、规则、流程与验收，AI 辅助代码和测试。OCR 仍有人工余项，不能写成零错误、全面自动审核或正式 CSV 验证；代码与测试站交付不等于全部新功能已实际使用，也不能证明节省工时或覆盖规模。历史图片继续说明当时页面结构，不作为新增功能截图。
 
 ## 私有性能案例（历史自述，公开不可复现）
 
@@ -104,6 +108,8 @@ git diff --check
 另有 2026-08-27—28 的私有专项记录，涉及计划外收件的原子提交、当前轮次占用、44/45 天阈值、未知投递停发和只读核对零外呼。它们用于交代业务判断来源，不作为本轮公开可执行证据，也不与上表测试数相加。真实权限、数据库事务、并发、外部消息和运维可靠性不由本仓库的内存演示证明。
 
 ## 历史发布与验证记录
+
+**2026-10-11 手机场景定位与交接反馈优化**：范围与本地结果见[当次验收](INTERACTION_QA.md#mobile-feedback-20261011)；实际合入、CI、Pages 与线上核验见 [PR #10 发布回执](https://github.com/MrPerfume/measurement-portfolio/pull/10#issuecomment-6107838567)。
 
 **2026-10-11 演示引导与推荐案例收口**：本轮范围与验证见[本轮验收](INTERACTION_QA.md#guide-20261011)。实际合入、CI、Pages 与个人主页 README 的发布结果统一见 [PR #9 发布回执](https://github.com/MrPerfume/measurement-portfolio/pull/9#issuecomment-6107206105)，以回执实际完成阶段为准，不将本地通过当作已上线；上一公开版本见 [PR #8 回执](https://github.com/MrPerfume/measurement-portfolio/pull/8#issuecomment-6106737059)。
 
