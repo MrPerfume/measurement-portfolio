@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
   <meta name="theme-color" content="#f7f8fa">
-  <meta name="description" content="计量与质量数字化作品集：交互体验周报检、分批取回与连续复核，了解部门协同、证书识别和台账核对的最新实践。">
+  <meta name="description" content="计量数字化管理实践：从送检、设备交接与证书复核的现场问题出发，展示需求梳理、流程设计和验收验证，并体验三个代表案例。">
   <meta name="robots" content="index,follow">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'; form-action 'none'">
   <meta property="og:type" content="website">
   <meta property="og:title" content="计量数字化管理作品集">
-  <meta property="og:description" content="把现场计量规则转化为可执行、可审计的协同系统。">
+  <meta property="og:description" content="从计量现场问题到系统流程，查看分批取回、分次到场与连续证书复核三个案例。">
   <meta property="og:url" content="https://mrperfume.github.io/measurement-portfolio/">
   <meta property="og:image" content="https://mrperfume.github.io/measurement-portfolio/assets/screenshots/01-system-overview.png">
   <link rel="canonical" href="https://mrperfume.github.io/measurement-portfolio/">
@@ -42,7 +42,7 @@
       <div class="hero-copy">
         <p class="eyebrow">从计量管理员到计量数字化管理者</p>
         <h1 id="hero-title"><span>把现场规则，变成</span><span>可执行的管理系统</span></h1>
-        <p class="hero-lede">面向设备与质量数字化管理、工业软件实施岗位。主导现场需求、业务规则与验收，借助 AI 完成原型与测试，把跨部门协作中的问题转化为可执行流程。</p>
+        <p class="hero-lede">围绕计量设备送检、实物交接、证书复核与跨部门协作，主导现场需求、业务规则与验收，把现场问题转成系统流程，推进原型验证和流程落地。</p>
         <div class="hero-actions">
           <a class="button button-primary" href="#cases">先看代表案例</a>
           <a class="button button-secondary" href="#demo">进入交互演示</a>
@@ -50,9 +50,9 @@
         </div>
         <p class="demo-boundary">更新于 2026-10-25 · <a href="#recent-practice">查看部门协同、证书识别与台账核对的新进展</a></p>
         <ul class="hero-proof" aria-label="核心证明">
-          <li><strong>业务判断</strong><span>从实物交接开始，不强迫现场补造前置事实</span></li>
-          <li><strong>可靠性治理</strong><span>异常隔离、幂等、状态守卫与通知结果分级</span></li>
-          <li><strong>工程证据</strong><span>公开领域内核、边界测试与持续验证</span></li>
+          <li><strong>现场需求</strong><span>梳理设备交接、排期与证书复核中的实际问题</span></li>
+          <li><strong>业务流程</strong><span>分别跟进设备去向、执行进度与证书结果</span></li>
+          <li><strong>验收验证</strong><span>用合成案例检查关键流程，保留对应测试与记录</span></li>
         </ul>
       </div>
 
@@ -81,12 +81,12 @@
     <section class="cases-section evidence-section" id="cases" aria-labelledby="cases-title">
       <div class="section-heading">
         <div><p class="eyebrow">Decisions in practice</p><h2 id="cases-title" tabindex="-1"><span>三个案例，</span><span>三个业务判断</span></h2></div>
-        <p>先读判断，再按兴趣体验。我的职责是现场需求、业务规则与验收，AI 辅助代码和测试。</p>
+        <p>先看现场问题、处理方式与验证方法，再选择一个案例亲手体验。</p>
       </div>
       <div class="case-stories">
-        <article><span class="case-tag">推荐先体验 · 实物交接 · 规则设计</span><h3>同批送出，不同方式取回</h3><p><strong>现场问题</strong> 有的设备回计量室，有的由部门直领，还有设备继续在检。</p><p><strong>我的判断</strong> 不用整批关闭掩盖剩余设备；逐台定义实际去向，直领不制造中间待领取事实。</p><p class="case-proof"><strong>验收依据</strong> 取回一台后剩余数量跨页一致；缺资料整次失败；审计只记录实际交接。</p><button class="button button-secondary" type="button" data-scenario="returns">体验双路径取回</button><a class="case-screenshot" href="assets/cases/02-returns.png" target="_blank" rel="noreferrer"><img src="assets/cases/02-returns.png" alt="交互原型：混合去向数量与取回、领取任务入口" width="1440" height="1000" loading="lazy"></a><small class="case-source">交互原型 · 本公开站点合成数据截图 · 点击查看原图</small></article>
-        <article><span class="case-tag">现场协同 · 流程梳理</span><h3>一次报检，多次到场</h3><p><strong>现场问题</strong> 排期会变，设备分次到场，整单状态容易失真。</p><p><strong>我的判断</strong> 不用一次预约代表整组执行；定义冻结范围，将建议、正式预约、到场与结果分开。</p><p class="case-proof"><strong>验收依据</strong> 待确认改期不覆盖原预约；重复到场被阻断；全部结果和证书完成才闭环。</p><button class="button button-secondary" type="button" data-scenario="weekly">体验周报检</button><a class="case-screenshot" href="assets/cases/01-weekly.png" target="_blank" rel="noreferrer"><img src="assets/cases/01-weekly.png" alt="交互原型：周单冻结范围、正式预约及分次到场统计" width="1440" height="1000" loading="lazy"></a><small class="case-source">交互原型 · 本公开站点合成数据截图 · 点击查看原图</small></article>
-        <article><span class="case-tag">单人工作流 · 验收设计</span><h3>连续复核，保留判断上下文</h3><p><strong>现场问题</strong> 反复进出详情容易丢进度，也容易把关联当作完成。</p><p><strong>我的判断</strong> 不让高分替代人工确认；区分匹配建议、确认关联与复核完成，失败和跳过保留待办。</p><p class="case-proof"><strong>验收依据</strong> 重复确认不多记事实；失败保留输入；成功定位下一份，返回仍保留上下文。</p><button class="button button-secondary" type="button" data-scenario="certificate">体验连续复核</button><a class="case-screenshot" href="assets/cases/03-review.png" target="_blank" rel="noreferrer"><img src="assets/cases/03-review.png" alt="交互原型：连续证书队列、候选依据与人工复核工作区" width="1440" height="1000" loading="lazy"></a><small class="case-source">交互原型 · 本公开站点合成数据截图 · 点击查看原图</small></article>
+        <article><span class="case-tag">推荐先体验 · 实物交接 · 规则设计</span><h3>同批送出，不同方式取回</h3><p><strong>现场问题</strong> 有的设备回计量室，有的由部门直领，还有设备继续在检。</p><p><strong>我的处理</strong> 逐台登记实际去向，分别跟进计量室取回和部门直领，未取回设备继续保留在检状态。</p><p class="case-proof"><strong>如何验证</strong> 取回一台后核对剩余数量；缺资料时保留原状态，审计记录对应实际交接。</p><button class="button button-secondary" type="button" data-scenario="returns">体验双路径取回</button><a class="case-screenshot" href="assets/cases/02-returns.png" target="_blank" rel="noreferrer"><img src="assets/cases/02-returns.png" alt="交互原型：混合去向数量与取回、领取任务入口" width="1440" height="1000" loading="lazy"></a><small class="case-source">交互原型 · 本公开站点合成数据截图 · 点击查看原图</small></article>
+        <article><span class="case-tag">现场协同 · 流程梳理</span><h3>一次报检，多次到场</h3><p><strong>现场问题</strong> 排期会变，设备分次到场，整单状态容易失真。</p><p><strong>我的处理</strong> 将预约安排、实际到场与检测结果分别记录，改期保留原预约，分次执行各自跟进。</p><p class="case-proof"><strong>如何验证</strong> 待确认改期保留原预约；检查重复到场提示，结果与证书齐全后再完成整单。</p><button class="button button-secondary" type="button" data-scenario="weekly">体验周报检</button><a class="case-screenshot" href="assets/cases/01-weekly.png" target="_blank" rel="noreferrer"><img src="assets/cases/01-weekly.png" alt="交互原型：周单冻结范围、正式预约及分次到场统计" width="1440" height="1000" loading="lazy"></a><small class="case-source">交互原型 · 本公开站点合成数据截图 · 点击查看原图</small></article>
+        <article><span class="case-tag">单人工作流 · 验收设计</span><h3>连续复核，保留判断上下文</h3><p><strong>现场问题</strong> 反复进出详情容易丢进度，也容易把关联当作完成。</p><p><strong>我的处理</strong> 把匹配建议、确认关联与复核完成分开，连续处理时保留当前进度、输入和待办。</p><p class="case-proof"><strong>如何验证</strong> 重复确认不多记；失败保留输入；完成后定位下一份，返回时仍保留上下文。</p><button class="button button-secondary" type="button" data-scenario="certificate">体验连续复核</button><a class="case-screenshot" href="assets/cases/03-review.png" target="_blank" rel="noreferrer"><img src="assets/cases/03-review.png" alt="交互原型：连续证书队列、候选依据与人工复核工作区" width="1440" height="1000" loading="lazy"></a><small class="case-source">交互原型 · 本公开站点合成数据截图 · 点击查看原图</small></article>
       </div>
       <p class="case-route"><a href="#demo">进入完整演示</a><span aria-hidden="true"> · </span><a href="#evidence">查看验证依据</a></p>
     </section>
@@ -105,9 +105,9 @@
         <div><span>共同闭环</span><button type="button" data-scenario="certificate">连续证书复核</button><button type="button" data-scenario="audit">审计与证据回看</button><small>实物、结果、证书分别确认</small></div>
       </div>
       <div class="contribution">
-        <div><strong>需求与规则</strong><p>把现场问题拆成可执行流程，明确哪些事实不能互相替代。</p></div>
-        <div><strong>实现协作</strong><p>AI 辅助代码和测试；业务判断及验收责任由我承担。</p></div>
-        <div><strong>验证范围</strong><p>合成原型可操作，公开测试可复现；完整系统能力另列验证边界。</p></div>
+        <div><strong>需求梳理</strong><p>从送检、交接和证书复核中整理现场问题，明确角色分工。</p></div>
+        <div><strong>流程设计</strong><p>分别记录排期、实物去向和证书结果，明确每一步的处理条件。</p></div>
+        <div><strong>验收验证</strong><p>通过合成案例和现有测试，检查数量、状态与操作记录是否一致。</p></div>
       </div>
     </section>
 
@@ -117,7 +117,7 @@
           <p class="eyebrow">Interactive case</p>
           <h2 id="demo-title" tabindex="-1">亲手走一遍脱敏业务闭环</h2>
         </div>
-        <p>所有按钮只改变当前页面内存；不读取真实数据，也不会发送任何消息。</p>
+        <p>演示使用合成数据，只改变当前页面内存；刷新可恢复，不读取真实数据或发送消息。</p>
       </div>
 
       <div class="demo-guide">
