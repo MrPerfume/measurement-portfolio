@@ -445,7 +445,7 @@ test('多计划组同屏时失败反馈归属实际提交的预约', async ({ pa
 
 test('内部场景定位工作区，外部入口与历史锚点保留各自位置', async ({ page }) => {
   expect(await page.locator('#role-buttons button, [data-action="reset"]').evaluateAll((buttons) => buttons.every((button) => button.getBoundingClientRect().height >= 44))).toBe(true);
-  await page.getByRole('link', { name: '先看代表案例', exact: true }).click();
+  await page.getByRole('link', { name: '体验相关业务场景', exact: true }).click();
   await page.getByRole('button', { name: '体验双路径取回', exact: true }).click();
   await expect(page.locator('#workspace-title')).toBeFocused();
   await expectInWorkingViewport(page.locator('#workspace-title'));
