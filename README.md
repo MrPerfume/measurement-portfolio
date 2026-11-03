@@ -1,38 +1,42 @@
 # 计量数字化管理作品集｜Measurement Portfolio
 
-> 面向设备与质量数字化管理、工业软件实施岗位。主导现场需求、业务规则与验收，借助 AI 完成原型与测试，把跨部门协作中的问题转化为可执行流程。
+> 围绕计量设备送检、实物交接、证书复核与跨部门协作，把现场规则转成可执行的系统流程。主导现场需求、业务规则与验收，推进原型验证和流程落地。
 
 [展示页](https://mrperfume.github.io/measurement-portfolio/) · [业务案例](docs/BUSINESS_FLOWS.md) · [工程证据](docs/ENGINEERING_EVIDENCE.md) · [GitHub Profile](https://github.com/MrPerfume)
 
-内容更新：**2026-10-25 部门协同、证书识别与台账核对**。[直接看最新实践](https://mrperfume.github.io/measurement-portfolio/#recent-practice)；[当前发布记录](docs/ENGINEERING_EVIDENCE.md#当前发布记录)列出本次检查与实际发布状态。六场景交互沿用 10 月 11 日版本，新进展以完整系统案例说明呈现。
-
 ## 我负责什么
 
-主导现场需求、业务规则与验收，AI 辅助代码和测试。我负责明确现场问题、定义事实边界和验收条件：预约不能替代到场，交接不能补造结果，高分不能替代人工确认。不宣称生产收益、合规认证或完整系统已全面验收。
+- **需求梳理**：从送检、交接和证书复核中整理现场问题，明确角色分工与处理条件。
+- **流程设计**：将预约安排、实物去向和证书结果分别记录，保留分批执行与人工确认过程。
+- **验收验证**：通过合成案例和现有测试，检查数量、状态与操作记录是否一致。
+
+希望继续参与设备与质量数字化管理、工业软件实施工作。
 
 ## 先体验一个案例
 
-先看[三个代表案例](https://mrperfume.github.io/measurement-portfolio/#cases)，推荐从分批取回开始，再体验周报检与连续复核。初始管理员取回样例：勾选一台 → 选择“取回计量室” → 登记 → 查看在检从 2 变 1 → 查看本次审计。外部直达先看演示介绍，页面内入口直达工作区；成功摘要使用本轮真实数量，审计回看后仍保留未提交草稿。推荐路线与当前任务分开，已操作会话以当前明细为准，不自动重置。
+先看[三个代表案例](https://mrperfume.github.io/measurement-portfolio/#cases)，推荐从分批取回开始，再体验周报检与连续复核。
 
-| 代表案例 | 我的规则与验收重点 | 在线入口 |
+| 现场问题 | 我的处理 | 如何验证 |
 | --- | --- | --- |
-| 同批送出，不同方式取回 | 不整批关闭；逐台记录去向，剩余数量和审计一致 | [分批取回](https://mrperfume.github.io/measurement-portfolio/?scenario=returns#demo) |
-| 一次报检，多次到场 | 拆分预约与到场；待确认改期不覆盖原预约，重复到场被阻断 | [周报检](https://mrperfume.github.io/measurement-portfolio/?scenario=weekly#demo) |
-| 单人连续证书复核 | 拆分建议、关联与完成；重复确认不多记，失败保留输入 | [连续复核](https://mrperfume.github.io/measurement-portfolio/?scenario=certificate#demo) |
+| 同批设备回计量室、部门直领或继续在检 | 逐台记录实际去向，保留未取回设备的在检状态 | [分批取回](https://mrperfume.github.io/measurement-portfolio/?scenario=returns#demo)：核对剩余数量与交接记录 |
+| 一次报检分多次到场，排期还会调整 | 分别记录预约、到场与结果，改期保留原预约 | [周报检](https://mrperfume.github.io/measurement-portfolio/?scenario=weekly#demo)：检查改期和重复到场处理 |
+| 连续复核多份证书，容易丢失处理进度 | 分开匹配建议、人工关联与复核完成，保留进度和待办 | [连续复核](https://mrperfume.github.io/measurement-portfolio/?scenario=certificate#demo)：检查重复确认、失败与返回后的上下文 |
 
-六场景、两条分支、三个角色保持不变。详细规则、交互原型截图与原后台六图见[业务说明](docs/BUSINESS_FLOWS.md)。
+首次体验可勾选一台设备 → 选择“取回计量室” → 登记 → 查看在检从 2 变 1 → 查看本次审计。已有操作时以当前明细为准；刷新恢复初始数据并进入链接指定场景，重置恢复默认场景。
+
+完整演示包含六场景、两条分支和三个角色。详细规则、交互原型截图与原后台六图见[业务说明](docs/BUSINESS_FLOWS.md)。
 
 ![统一管理概览：后台隔离环境合成截图，非交互原型](assets/screenshots/01-system-overview.png)
 
 ## 验证与边界
 
-10 月 11 日公开版本的验证为 **20 项 PHP／57 个断言、46 项 Node、48 项 Chromium**，见[历史交互验收](docs/INTERACTION_QA.md#mobile-feedback-20261011)；本次内容更新检查见[10 月 25 日记录](docs/INTERACTION_QA.md#practice-20261025)，不累计历次数量。PHP 验证既有领域内核，Node 与浏览器验证六场景、导航、任务引导和交接反馈；演示只使用合成数据与内存，无登录、数据库、上传、接口、统计或持久化。
+公开演示只使用合成数据与页面内存，无登录、数据库、上传、接口、统计或持久化。固定演示时刻为 2026-09-07 17:00（北京时间）；角色是分工模拟，非身份鉴权。
 
-固定演示时刻为 2026-09-07 17:00（北京时间）；角色是分工模拟，非身份鉴权。刷新恢复初始数据并进入链接指定场景，重置恢复默认场景。
+10 月 11 日公开版本的验证为 **20 项 PHP／57 个断言、46 项 Node、48 项 Chromium**，见[历史交互验收](docs/INTERACTION_QA.md#mobile-feedback-20261011)；10 月 25 日内容更新检查见[对应记录](docs/INTERACTION_QA.md#practice-20261025)，不累计历次数量。PHP 验证既有领域内核，Node 与浏览器验证六场景、导航、任务引导和交接反馈，不代表生产收益、合规认证或完整系统全面验收。
 
 ## 近期业务实践（完整系统案例说明）
 
-截至 2026-10-25，以下为完整系统的业务实践说明：
+截至 **2026-10-25**，以下为完整系统的业务实践说明，六场景交互沿用 10 月 11 日版本。[直接看近期实践](https://mrperfume.github.io/measurement-portfolio/#recent-practice)；[发布记录](docs/ENGINEERING_EVIDENCE.md#当前发布记录)列出当次检查与实际发布状态。
 
 - [使用部门按计划组协同与证书查询](docs/BUSINESS_FLOWS.md#department-portal-case)：按计划组申报数量，送检和领取分别跟进；按设备分组、分页查询证书历史。10 月 24—25 日相关版本部署测试站并补充归档。
 - [检测单位排期与分组清单](docs/BUSINESS_FLOWS.md#mobile-plan-case)：人员与日期确认、计划组编排、版本冻结及分批执行。既有代表场景验收与后续功能进展分开记录。
