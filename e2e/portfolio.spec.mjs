@@ -75,7 +75,10 @@ test('招聘阅读入口前置，锚点往返和案例导航不改业务会话',
   await expect(page.locator('#cases')).toBeAttached();
   await expect(page.locator('#cases .case-stories h3')).toHaveText(['同批送出，不同方式取回', '一次报检，多次到场', '连续复核，保留判断上下文']);
   expect(await page.locator('#cases').evaluate((element) => Boolean(element.compareDocumentPosition(document.querySelector('#demo')) & Node.DOCUMENT_POSITION_FOLLOWING))).toBe(true);
-  await page.getByRole('link', { name: '先看代表案例', exact: true }).click();
+  await page.getByRole('link', { name: '先看实施案例', exact: true }).click();
+  await expect(page.locator('#implementation')).toBeFocused();
+  await expectInWorkingViewport(page.locator('#implementation'));
+  await page.getByRole('link', { name: '体验相关业务场景', exact: true }).click();
   await expectInWorkingViewport(page.locator('#cases-title'));
   await expect(page.locator('#cases-title')).toBeFocused();
   await page.screenshot({ path: 'output/playwright/recruiter-20261011/raw/' + testInfo.project.name + '-cases.png' });
