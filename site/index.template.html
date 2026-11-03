@@ -5,12 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
   <meta name="theme-color" content="#f7f8fa">
-  <meta name="description" content="计量数字化管理实践：从送检、设备交接与证书复核的现场问题出发，展示需求梳理、流程设计和验收验证，并体验三个代表案例。">
+  <meta name="description" content="计量现场管理与数字化实施实践：送检协同、证书复核与台账核对；展示需求梳理、流程设计、验收验证及测试站交付案例。">
   <meta name="robots" content="index,follow">
   <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'none'; object-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; connect-src 'none'; form-action 'none'">
   <meta property="og:type" content="website">
   <meta property="og:title" content="计量数字化管理作品集">
-  <meta property="og:description" content="从计量现场问题到系统流程，查看分批取回、分次到场与连续证书复核三个案例。">
+  <meta property="og:description" content="从计量现场需求到系统交付，了解部门送检协同与证书查询的实施过程，再体验三个业务场景。">
   <meta property="og:url" content="https://mrperfume.github.io/measurement-portfolio/">
   <meta property="og:image" content="https://mrperfume.github.io/measurement-portfolio/assets/screenshots/01-system-overview.png">
   <link rel="canonical" href="https://mrperfume.github.io/measurement-portfolio/">
@@ -30,7 +30,8 @@
       </span>
     </a>
     <nav class="header-links" aria-label="页面导航">
-      <a href="#cases">代表案例</a>
+      <a href="#implementation">实施案例</a>
+      <a href="#cases">业务场景</a>
       <a href="#demo">交互演示</a>
       <a href="#evidence">工程证据</a>
       <a class="github-link" href="https://github.com/MrPerfume" target="_blank" rel="noreferrer">GitHub Profile <span aria-hidden="true">↗</span></a>
@@ -40,41 +41,50 @@
   <main id="main-content">
     <section class="hero" id="top" aria-labelledby="hero-title">
       <div class="hero-copy">
-        <p class="eyebrow">从计量管理员到计量数字化管理者</p>
-        <h1 id="hero-title"><span>把现场规则，变成</span><span>可执行的管理系统</span></h1>
-        <p class="hero-lede">围绕计量设备送检、实物交接、证书复核与跨部门协作，主导现场需求、业务规则与验收，把现场问题转成系统流程，推进原型验证和流程落地。</p>
+        <p class="eyebrow">送检协同 · 证书复核 · 设备台账</p>
+        <h1 id="hero-title"><span>计量现场管理</span><span>与工业软件实施</span></h1>
+        <p class="hero-lede">围绕送检安排、设备交接、证书复核和台账核对，主导需求梳理、业务规则与验收，推动使用部门、计量室和检测单位之间的流程协同。</p>
         <div class="hero-actions">
-          <a class="button button-primary" href="#cases">先看代表案例</a>
+          <a class="button button-primary" href="#implementation">先看实施案例</a>
           <a class="button button-secondary" href="#demo">进入交互演示</a>
           <a class="button button-secondary" href="https://github.com/MrPerfume/measurement-portfolio" target="_blank" rel="noreferrer">查看公开源码 <span aria-hidden="true">↗</span></a>
         </div>
-        <p class="demo-boundary">更新于 2026-10-25 · <a href="#recent-practice">查看部门协同、证书识别与台账核对的新进展</a></p>
+        <p class="demo-boundary">业务记录截至 2026-10-25 · <a href="#implementation">查看部门协同的实施过程与交付状态</a></p>
         <ul class="hero-proof" aria-label="核心证明">
-          <li><strong>现场需求</strong><span>梳理设备交接、排期与证书复核中的实际问题</span></li>
-          <li><strong>业务流程</strong><span>分别跟进设备去向、执行进度与证书结果</span></li>
-          <li><strong>验收验证</strong><span>用合成案例检查关键流程，保留对应测试与记录</span></li>
+          <li><strong>计量业务</strong><span>送检、实物交接、证书复核与台账核对</span></li>
+          <li><strong>实施工作</strong><span>需求梳理、角色流程设计与验收条件</span></li>
+          <li><strong>交付进展</strong><span>相关版本测试站交付，部分协同已实际使用</span></li>
         </ul>
       </div>
 
-      <div class="hero-instrument" aria-label="业务闭环概览">
-        <div class="instrument-head">
-          <span class="demo-badge">脱敏演示数据 · Demo Data</span>
-          <span class="prototype-label">静态交互原型</span>
-        </div>
-        <div class="dial" aria-hidden="true">
-          <span class="dial-value">45</span>
-          <span class="dial-unit">天首次跟进阈值</span>
-          <span class="dial-needle"></span>
-        </div>
-        <div class="instrument-reading">
-          <span>规则状态</span>
-          <strong>事实可证明后才流转</strong>
-        </div>
-        <div class="evidence-strip" aria-label="公开可验证数据">
-          <div><strong>6</strong><span>交互场景</span></div>
-          <div><strong>2</strong><span>业务分支</span></div>
-          <div><strong>3</strong><span>角色视角</span></div>
-        </div>
+      <aside class="hero-summary" aria-label="计量工作与实施职责概览">
+        <p class="eyebrow">工作与交付概览</p>
+        <h2>把现场任务<br>组织成系统流程</h2>
+        <dl class="summary-scope">
+          <div><dt>送检与交接</dt><dd>计划组、分次到场、计量室取回与部门直领，分别跟进实际进度。</dd></div>
+          <div><dt>证书与台账</dt><dd>核对设备身份和日期，保留历史关联，预览差异后人工确认。</dd></div>
+          <div><dt>跨角色协同</dt><dd>使用部门申报、检测方提排期建议、计量管理员确认，明确各方任务。</dd></div>
+        </dl>
+        <div class="summary-status"><span>我的职责</span><strong>需求梳理 · 业务规则 · 验收验证</strong></div>
+        <a class="summary-link" href="#implementation">查看实施案例 <span aria-hidden="true">↗</span></a>
+      </aside>
+    </section>
+
+    <section class="evidence-section implementation-section" aria-labelledby="implementation">
+      <div class="section-heading">
+        <div><p class="eyebrow">Implementation in practice</p><h2 id="implementation" tabindex="-1">部门送检协同<br>与证书查询</h2></div>
+        <p>一个从现场需求、流程设计到测试站交付的计量数字化案例。我的工作是主导需求、业务规则与验收。</p>
+      </div>
+      <div class="implementation-case">
+        <p class="implementation-context"><strong>现场起点</strong> 使用部门需要知道本次该送多少、设备送到哪里、何时可以领取，以及去哪查历次证书。分散入口和逐项核对，增加了找任务与查资料的负担。</p>
+        <ol class="implementation-steps" aria-label="实施过程">
+          <li><h3>梳理需求</h3><p>将部门关心的问题整理为申报、送检、领取与证书查询四类任务，明确各角色需要的信息。</p></li>
+          <li><h3>设计流程</h3><p>按计划组申报数量，送检与领取分别跟进；证书按设备分组，分页查询历史。</p></li>
+          <li><h3>定义验收</h3><p>明确计划数量、实际交接与证书记录各自的确认条件；项目记录包含桌面与模拟手机代表场景检查。</p></li>
+          <li><h3>跟进交付</h3><p>部门门户于 2026-10-24 部署测试站，25 日补充证书分组归档，按阶段记录进展。</p></li>
+        </ol>
+        <div class="implementation-outcome"><strong>实际工作已有部分通知、查询与协同使用。</strong><p>新增功能的使用规模与收益尚待确认。本案例根据既有项目记录整理，完整系统进展与下方合成交互原型分别说明。</p></div>
+        <p class="case-route"><a href="https://github.com/MrPerfume/measurement-portfolio/blob/main/docs/BUSINESS_FLOWS.md#department-portal-case" target="_blank" rel="noreferrer">查看业务记录 ↗</a><span aria-hidden="true"> · </span><a href="#cases">体验相关业务场景</a></p>
       </div>
     </section>
 
@@ -120,6 +130,7 @@
         <p>演示使用合成数据，只改变当前页面内存；刷新可恢复，不读取真实数据或发送消息。</p>
       </div>
 
+      <p class="demo-reference"><span class="demo-badge">脱敏演示数据 · Demo Data</span> <span class="prototype-label">静态交互原型</span></p>
       <div class="demo-guide">
         <p>推荐先体验：分批取回 → 查看剩余在检数量 → 查看审计记录。</p>
         <button class="button button-secondary" type="button" data-scenario="returns">从分批取回开始</button>
@@ -169,17 +180,10 @@
     <section class="evidence-section" id="recent-practice" aria-labelledby="recent-practice-title">
       <section class="recent-practice" aria-labelledby="recent-practice-title">
         <div class="section-heading">
-          <div><p class="eyebrow">Recent practice</p><h2 id="recent-practice-title">近期业务实践</h2></div>
-          <p>2026-10-25 更新 · 完整系统案例说明，交互体验仍为上方六个合成场景</p>
+          <div><p class="eyebrow">More metrology practice</p><h2 id="recent-practice-title">更多计量业务实践</h2></div>
+          <p>业务记录截至 2026-10-25 · 排期协同、记录关联与证书核对，交付阶段见各项说明</p>
         </div>
         <div class="practice-grid">
-          <article>
-            <span class="case-tag">跨部门协同</span>
-            <h3>按计划组申报，按设备查证书</h3>
-            <p><strong>现场问题</strong> 使用部门关心该送多少、送到哪里、何时领取，以及某台设备历次证书；逐项找清单容易漏掉当前任务。</p>
-            <p><strong>业务判断</strong> 按计划组提交数量，送检与领取分别跟进；证书按设备分组，分页查看历史。进度与预计安排分别表达，预计时间不能代替实际领取。</p>
-            <p class="practice-limit"><strong>当前进展</strong> 部门门户于 10 月 24 日部署测试站，25 日补充证书分组归档；项目记录含桌面与模拟手机代表场景检查。部分通知、查询与协同已用于实际工作，新功能的使用规模与收益仍待确认。</p>
-          </article>
           <article>
             <span class="case-tag">排期与移动端协同</span>
             <h3>检测单位排期与分组清单</h3>
@@ -203,11 +207,6 @@
           </article>
         </div>
       </section>
-      <article class="performance-case">
-        <div><p class="eyebrow">Measured, with boundaries</p><h3>一次可解释的证书页性能优化</h3><p>定位到行菜单重复计算，优化局部渲染，同时保留原有权限判断。</p></div>
-        <div><strong>584.23 <span>→</span> 430.38 <small>ms</small></strong><p>应用处理中位数改善约 26.3%</p></div>
-        <p class="performance-note">私有系统 2026-09-05 本地同环境对照，首轮单列、后五次预热样本取中位数；证书列表实际 20 行。公开不可复现的历史自述，不是生产收益、INP、P95 或 SLA，也不包含 OCR 和真实 PDF 解析。</p>
-      </article>
     </section>
 
     <section class="evidence-section" id="evidence" aria-labelledby="evidence-title">
@@ -268,10 +267,16 @@
 
     </section>
 
+      <article class="performance-case evidence-section">
+        <div><p class="eyebrow">Measured, with boundaries</p><h3>一次可解释的证书页性能优化</h3><p>定位到行菜单重复计算，优化局部渲染，同时保留原有权限判断。</p></div>
+        <div><strong>584.23 <span>→</span> 430.38 <small>ms</small></strong><p>应用处理中位数改善约 26.3%</p></div>
+        <p class="performance-note">私有系统 2026-09-05 本地同环境对照，首轮单列、后五次预热样本取中位数；证书列表实际 20 行。公开不可复现的历史自述，不是生产收益、INP、P95 或 SLA，也不包含 OCR 和真实 PDF 解析。</p>
+      </article>
+
     <section class="closing" aria-labelledby="closing-title">
       <p class="eyebrow">Next role</p>
-      <h2 id="closing-title">我希望继续解决的，不只是台账问题。</h2>
-      <p>下一阶段，我希望把计量现场经验延展为设备与质量数字化管理能力，并参与工业软件实施、业务梳理和产品落地。</p>
+      <h2 id="closing-title">继续推进计量业务与系统实施。</h2>
+      <p>关注工业软件实施、设备与质量数字化管理岗位。以计量业务理解为起点，继续承担需求梳理、流程设计、验收验证与交付协作。</p>
       <a class="button button-primary" href="https://github.com/MrPerfume" target="_blank" rel="noreferrer">通过 GitHub 了解我 <span aria-hidden="true">↗</span></a>
     </section>
   </main>
